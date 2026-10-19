@@ -1,7 +1,6 @@
 import { CallToAction, ScrollCue } from '@/components/ui';
 import Gallery from '@/components/Gallery';
 import { metadata } from '@/lib/seo';
-import { publishedProjects } from '@/data/projects';
 export const generateMetadata = () =>
   metadata(
     'Our Projects',
@@ -32,17 +31,6 @@ export default function Projects() {
           </div>
           <div className="portfolio-intro-foot">
             <span>ON SITE. IN DETAIL.</span>
-            <p>
-              <strong>{publishedProjects.length.toString().padStart(2, '0')}</strong> completed
-              projects <span aria-hidden="true">/</span>{' '}
-              <strong>
-                {publishedProjects
-                  .reduce((total, p) => total + p.images.filter((i) => i.approved).length, 0)
-                  .toString()
-                  .padStart(2, '0')}
-              </strong>{' '}
-              site photographs
-            </p>
             <span>
               BATTICALOA & AMPARA <span aria-hidden="true">↗</span>
             </span>

@@ -4,7 +4,9 @@ test('projects show the supplied details and category filters', async ({ page })
   await page.goto('/projects');
   await expect(page.locator('.project-card')).toHaveCount(6);
   await expect(page.locator('.project-contact-sheet button')).toHaveCount(17);
-  await expect(page.locator('.portfolio-intro-foot')).toContainText('17 site photographs');
+  await expect(page.locator('.portfolio-intro-foot')).not.toContainText(
+    /completed projects|site photographs/,
+  );
   await page.getByRole('button', { name: /^Rooftop Waterproofing/ }).click();
   await expect(page.locator('.project-card')).toHaveCount(2);
   await expect(page.locator('.project-card').first()).toContainText('2,300 sq ft');
