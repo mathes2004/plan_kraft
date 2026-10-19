@@ -13,7 +13,8 @@ The active quote form now posts directly to FormSubmit for **mathesmathes20005@g
 - Eight desktop/mobile static export tests passed: all seven repository-prefixed routes, navigation and reloads, local gallery photos, local WebGL banner, enabled quote form with mocked delivery, sitemap/robots and 404 handling. Missing segment-payload paths from the installed Next.js export are materialized as aliases by the Pages build script.
 - No live email, activation request or confirmed mailbox receipt was performed. An additional external documentation check was not executed because automatic approval review could not complete due to a session usage limit. Local tests continued without bypassing the review.
 - Required live acceptance: deploy this version, submit a test, activate FormSubmit through the recipient's confirmation email (including Spam), then submit again and record actual receipt here. Provider acceptance alone is not proof of mailbox delivery.
-- GitHub Pages deployment is prepared but not confirmed published. The connected GitHub account last checked had only read access to the target repository.
+- GitHub Pages is published at https://mathes2004.github.io/plan_kraft/. The first automatic push (`d903331`) matched local and remote main. Windows task `PlanKraft-GitHub-AutoSync` is running as the current user with limited privileges and restarts at sign-in. Local Git uses the existing owner sign-in, separately from the read-only GitHub connector.
+- Deployment workflow run `39230437111`, attempt 2, succeeded after enabling Pages with GitHub Actions. A headless Edge check loaded all seven published routes with one heading/footer each, an enabled quote form with the correct recipient endpoint, and no failed site resource responses or browser runtime errors. No form submissions were sent.
 
 ## Previous broader acceptance record
 

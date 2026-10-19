@@ -61,7 +61,7 @@ Open http://127.0.0.1:4173/plan_kraft/. The build creates `.pages-preview/out`; 
 
 To publish, push the application to the target repository's `main` branch and choose **Settings → Pages → Build and deployment → Source: GitHub Actions**. The workflow in `.github/workflows/pages.yml` builds and deploys automatically. An authorized repository owner must enable Pages and grant write access before this workspace can publish.
 
-Expected URL after successful deployment: **https://mathes2004.github.io/plan_kraft/**. Preparing a build or workflow does not publish it; check the repository's Actions tab for the deployment outcome. The GitHub connector and local Git can have different account permissions. Automatic sync uses local Git and Windows Git Credential Manager.
+Published client preview: **https://mathes2004.github.io/plan_kraft/**. GitHub Pages is enabled with GitHub Actions, and the first deployment succeeded. Check the repository's Actions tab for each subsequent deployment outcome. The GitHub connector and local Git can have different account permissions. Automatic sync uses local Git and Windows Git Credential Manager.
 
 `GITHUB_REPOSITORY` determines the build's default repository path. `PAGES_BASE_PATH` and `PAGES_SITE_ORIGIN` can override it; the workflow obtains these from GitHub Pages. For a normal server deployment, set `NEXT_PUBLIC_SITE_URL` to the actual origin and leave `SITE_INDEXABLE=false` until final approval. Preview robots directives are not access controls.
 
