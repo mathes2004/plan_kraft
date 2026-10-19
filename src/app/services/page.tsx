@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { PageIntro, QuoteButton, CallToAction } from '@/components/ui';
 import { services } from '@/data/services';
 import { metadata } from '@/lib/seo';
@@ -38,13 +37,8 @@ export default function Services() {
           <div className="services-list">
             {services.map((s, i) => (
               <article className="service-detail" id={s.id} key={s.id}>
-                <div className="service-graphic service-photo">
-                  <Image
-                    src={s.image.src}
-                    alt={s.image.alt}
-                    fill
-                    sizes="(max-width: 700px) 88vw, 45vw"
-                  />
+                <div className="service-graphic service-image-placeholder" aria-hidden="true">
+                  <span>0{i + 1}</span>
                 </div>
                 <div>
                   <p className="eyebrow">0{i + 1} / WATERPROOFING & REPAIR</p>

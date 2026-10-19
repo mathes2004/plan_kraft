@@ -5,7 +5,7 @@
 | User-selected reference logo | https://plan-kraft-roof-protection.socialrook16.chatgpt.site/ | Copied unchanged SVG paths and matching wordmark styling, as requested | Shared `BrandLogo.tsx` in header and footer |
 | Interactive homepage house | https://plan-kraft-roof-protection.socialrook16.chatgpt.site/ | User-requested reference banner; house scene and renderer copied locally, controls and layout adapted | Home banner in `public/banner/`; Three.js r169 and font licenses included beside local dependencies |
 | Rooftop architectural illustration | Repository-native SVG in `src/components/ui.tsx` | Illustration only | Fallback when no approved rooftop project photograph is available |
-| Service images 01-09 | Nine numbered local image files supplied by the user, listed below | User-selected images copied without modifying their contents; not automatically published as portfolio projects | `src/assets/services/`; static imports and shared `image` mapping in `src/data/services.ts` for the Services page and homepage previews |
+| Service images 01-09 | Nine numbered local image files supplied by the user, listed below | Retired from the website at the user's request; originals retained locally pending replacement photos | `src/assets/services/`; no active imports or rendered service photos |
 | Genuine project photos | Seventeen originals supplied by the user for projects 335, 333, 318, 316, 314 and 310 | Explicitly authorized for publication in the user's project-showcase requests | `src/assets/projects/`; six Projects page showcases; the original three featured records remain on the homepage; completed rooftop photograph also used on About |
 | Exterior BEFORE photograph | User-provided `832835973_1068602759141192_771004835693052204_n.jpg` | User-approved for homepage comparison; original 2048 x 1153 photo copied without modification | `src/assets/before-after/exterior-before.jpg` |
 | Exterior AFTER photograph | User-provided `830540272_1068600839141384_144411095039607790_n.jpg` | User-approved for homepage comparison; original 1672 x 941 photo copied without modification | `src/assets/before-after/exterior-after.jpg` |
@@ -29,7 +29,7 @@ For each photo added, record original filename/source, written business approval
 | 08 | Wall Leakage / Dampness Treatment | Dampness Treatment.jfif | dampness-treatment.jpg | 547 x 365 |
 | 09 | Commercial / Industrial Waterproofing | Industrial Waterproofing.jfif | industrial-waterproofing.jpg | 516 x 387 |
 
-The supplied JFIF files contain JPEG images and are copied byte-for-byte with `.jpg` filenames. The homepage's three previews use the same Rooftop, Bathroom and Balcony images as services 01-03.
+The supplied JFIF files contain JPEG images and are copied byte-for-byte with `.jpg` filenames. All nine images above have been removed from the Services page and the shared homepage previews pending the user's new photographs. Numbered panels preserve the layout in the meantime. Copy replacement photographs into `src/assets/services/` and restore a shared image mapping in `src/data/services.ts` when the user supplies their paths.
 
 ## Completed project photographs
 
