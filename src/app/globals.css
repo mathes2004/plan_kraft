@@ -632,6 +632,14 @@ button:enabled:active {
   width: min(100cqw, calc(100cqh * var(--service-image-ratio)));
   aspect-ratio: var(--service-image-ratio);
 }
+.service-preview .preview-card .service-graphic {
+  height: auto;
+  aspect-ratio: 1086 / 1280;
+  container-type: normal;
+}
+.service-preview .service-image-frame {
+  width: 100%;
+}
 .graphic-building {
   width: 160px;
   height: 105px;
@@ -2564,9 +2572,6 @@ button:enabled:active {
   }
   .image-note {
     top: 198px;
-  }
-  .service-preview .preview-card:not(:first-child) .service-graphic {
-    height: 180px;
   }
   .service-preview .preview-card:not(:first-child) .image-note {
     top: 148px;
