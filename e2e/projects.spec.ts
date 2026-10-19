@@ -4,6 +4,7 @@ test('projects show the supplied details and category filters', async ({ page })
   await page.goto('projects/');
   await expect(page.locator('.project-card')).toHaveCount(12);
   await expect(page.locator('.project-contact-sheet button')).toHaveCount(32);
+  await expect(page.locator('.project-grid')).not.toContainText(/PROJECT\s*\/\s*\d+/i);
   await expect(page.locator('.portfolio-intro-foot')).not.toContainText(
     /completed projects|site photographs/,
   );
@@ -11,14 +12,14 @@ test('projects show the supplied details and category filters', async ({ page })
   await expect(page.locator('.project-card')).toHaveCount(3);
   await expect(page.locator('.project-card').first()).toContainText('2,300 sq ft');
   await expect(page.locator('.project-card').first()).toContainText('4 days');
-  await expect(page.locator('.project-card').filter({ hasText: 'PROJECT / 314' })).toContainText(
-    'Ampara',
-  );
+  await expect(
+    page.locator('.project-card').filter({ hasText: 'Rooftop & bathroom waterproofing' }),
+  ).toContainText('Ampara');
   await page.getByRole('button', { name: /^Bathroom Waterproofing/ }).click();
   await expect(page.locator('.project-card')).toHaveCount(3);
-  await expect(page.locator('.project-card').filter({ hasText: 'PROJECT / 314' })).toContainText(
-    'Rooftop & bathroom waterproofing',
-  );
+  await expect(
+    page.locator('.project-card').filter({ hasText: 'Rooftop & bathroom waterproofing' }),
+  ).toContainText('Rooftop & bathroom waterproofing');
   await page.getByRole('button', { name: /^Water Tank Waterproofing/ }).click();
   await expect(page.locator('.project-card')).toHaveCount(3);
   await expect(page.locator('.project-card').first()).toContainText('150 mm waterbar');
@@ -26,10 +27,12 @@ test('projects show the supplied details and category filters', async ({ page })
   await expect(page.locator('.project-grid')).not.toContainText(/\b(?:roof|rooftop) coating\b/i);
   await page.getByRole('button', { name: /^Epoxy Grout Restoration/ }).click();
   await expect(page.locator('.project-card')).toHaveCount(1);
-  await expect(page.locator('.project-card')).toContainText('PROJECT / 318');
+  await expect(page.locator('.project-card')).toContainText('Epoxy grout restoration');
   await page.getByRole('button', { name: /^External Wall Waterproofing/ }).click();
   await expect(page.locator('.project-card')).toHaveCount(2);
-  const wall331 = page.locator('.project-card').filter({ hasText: 'PROJECT / 331' });
+  const wall331 = page
+    .locator('.project-card')
+    .filter({ hasText: 'External wall waterproofing in Batticaloa' });
   await expect(wall331).toContainText('3,360 sq ft');
   await expect(wall331).toContainText('15 days');
   await expect(wall331).toContainText('5 years');
@@ -55,6 +58,9 @@ test('all thirty-two original photos load locally in the accessible gallery', as
     const gallery = page.getByRole('dialog');
     await expect(gallery).toBeVisible();
     await expect(gallery.getByRole('button', { name: 'Close gallery' })).toBeFocused();
+    await expect(gallery.locator('.lightbox-bar')).toContainText('PROJECT GALLERY');
+    await expect(gallery.locator('.lightbox-bar')).not.toContainText(/PROJECT\s+\d+/i);
+    await expect(gallery).not.toHaveAttribute('aria-label', /project\s+\d+/i);
     await expect(gallery.locator('.lightbox-controls')).toContainText(
       `${coverIndices[project] + 1} / ${count}`,
     );

@@ -162,7 +162,6 @@ export default function Gallery({ featured = false }: { featured?: boolean }) {
                 </div>
                 <div className="project-details">
                   <div className="project-kicker">
-                    <span>PROJECT / {p.number}</span>
                     <span>{p.location}</span>
                   </div>
                   <ProjectHeading className="project-title">{p.title}</ProjectHeading>
@@ -213,7 +212,7 @@ export default function Gallery({ featured = false }: { featured?: boolean }) {
       <dialog
         ref={dialog}
         className="lightbox"
-        aria-label={selected ? `${selected.title} — project ${selected.number}` : 'Project gallery'}
+        aria-label={selected ? `${selected.title} project gallery` : 'Project gallery'}
         onCancel={(e) => {
           e.preventDefault();
           close();
@@ -241,7 +240,7 @@ export default function Gallery({ featured = false }: { featured?: boolean }) {
           <>
             <div className="lightbox-bar">
               <span className="project-label">
-                PLAN KRAFT <span aria-hidden="true">/</span> PROJECT {selected.number}
+                PLAN KRAFT <span aria-hidden="true">/</span> PROJECT GALLERY
               </span>
               <button onClick={close} autoFocus aria-label="Close gallery">
                 Close <span aria-hidden="true">×</span>
