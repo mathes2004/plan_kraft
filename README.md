@@ -34,6 +34,8 @@ The active form uses the documented [Forminit submission endpoint](https://formi
 
 The website's expected notification recipient is **Plankraftwaterproofing@gmail.com**, shared by the public contact details and the optional server endpoint through `src/data/quote-config.ts`. Forminit routes notifications through its dashboard workflow; the website cannot choose or verify that recipient by adding a field to the submission. Changing the recipient requires updating the workflow's To field and publishing it; changing this project reference alone cannot redirect delivery.
 
+Online Forminit submissions are currently paused (`quoteConfig.enabled: false`) because a live notification reached an unauthorized previous inbox. Resume only after every email notification step and branch is checked: keep one notification with To set exclusively to the expected recipient, empty Cc/Bcc, and publish the workflow. Set Reply-to to the expected recipient when replies should go to the business inbox. No private dashboard credentials are stored in this website. Once the routing is corrected, enable submissions, send one clearly labelled test, and verify both the notification action's recipient log and Gmail receipt.
+
 To configure or review it:
 
 1. Open form **nilov0qnww9** in the [Forminit dashboard](https://app.forminit.com/).

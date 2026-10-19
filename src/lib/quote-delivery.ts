@@ -8,9 +8,9 @@ export function forminitEndpoint(formId: string) {
   const id = formId.trim();
   return /^[a-zA-Z0-9_-]+$/.test(id) && id.length <= 128 ? `https://forminit.com/f/${id}` : null;
 }
-export const quoteDeliveryEndpoint = forminitEndpoint(
-  process.env.NEXT_PUBLIC_FORMINIT_FORM_ID || quoteConfig.formId,
-);
+export const quoteDeliveryEndpoint = quoteConfig.enabled
+  ? forminitEndpoint(process.env.NEXT_PUBLIC_FORMINIT_FORM_ID || quoteConfig.formId)
+  : null;
 
 export const quoteFieldNames = {
   name: 'fi-sender-fullName',
