@@ -79,7 +79,7 @@ test('Send delivers every field to the configured Forminit form and prevents con
     'fi-sender-fullName': 'Test Customer',
     'fi-sender-phone': '+94771234567',
     'fi-text-projectDistrict': 'Batticaloa',
-    'fi-text-service': 'Roof / Rooftop Waterproofing',
+    'fi-text-service': 'Rooftop Waterproofing',
     'fi-text-message': 'Water is entering through the roof.',
     _gotcha: '',
     'fi-url-source': 'http://localhost:3000/request-quote',

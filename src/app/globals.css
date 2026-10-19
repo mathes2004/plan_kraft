@@ -623,6 +623,15 @@ button:enabled:active {
 .service-photo img {
   object-fit: cover;
 }
+.service-photo-contained {
+  container-type: size;
+}
+.service-image-frame {
+  position: relative;
+  overflow: hidden;
+  width: min(100cqw, calc(100cqh * var(--service-image-ratio)));
+  aspect-ratio: var(--service-image-ratio);
+}
 .graphic-building {
   width: 160px;
   height: 105px;

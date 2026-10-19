@@ -47,7 +47,7 @@ describe('Forminit delivery contract', () => {
       'fi-sender-fullName': 'Test Customer',
       'fi-sender-phone': '+94771234567',
       'fi-text-projectDistrict': 'Batticaloa',
-      'fi-text-service': 'Roof / Rooftop Waterproofing',
+      'fi-text-service': 'Rooftop Waterproofing',
       'fi-text-message': 'Please inspect a leak in the roof.',
       'fi-text-reference': parsed.submissionId,
       'fi-url-source': 'https://mathes2004.github.io/plan_kraft/request-quote/',

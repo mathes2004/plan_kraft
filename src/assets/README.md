@@ -3,7 +3,7 @@
 Store all user-provided images here, including future uploads. Keep originals in descriptive subfolders:
 
 - `brand/`: the original `plan-kraft-logo.jpg`, copied unchanged from the user's `logo.jpg` and shared by the header and footer.
-- `services/`: sixteen current service images, mapped in `src/data/services.ts`. Homepage previews reuse the Epoxy Grouting, Fiber Paint Application and Polyurethane Coating Application images. Supplied promotional artwork remains unchanged; the epoxy posters are framed to exclude outdated contact banners. Older unused images remain unreferenced.
+- `services/`: sixteen current service images, mapped in `src/data/services.ts`. Homepage previews reuse the Epoxy Grouting, Fiber Paint Application and Polyurethane Coating Application images. `ServicePhoto.tsx` contains the rooftop photo and service posters without zooming; poster framing excludes outdated contact banners and unrelated client details. Rooftop Waterproofing and Roof Waterproofing have separate images and entries. Supplied files remain unchanged; older unused images remain unreferenced.
 - `before-after/`: the original exterior comparison pair used on the homepage.
 - `projects/`: all 32 original site photographs for the twelve published projects, grouped by project number. Store every future portfolio photo in `projects/<project-number>/`; see `projects/README.md`.
 
@@ -11,7 +11,7 @@ Reference images through static imports, never a local computer path or a `/src/
 
 ```tsx
 import Image from 'next/image';
-import rooftopImage from '@/assets/services/rooftop-waterproofing.jpg';
+import rooftopImage from '@/assets/services/rooftop-waterproofing-new.jpg';
 
 <Image src={rooftopImage} alt="Worker coating a rooftop" />;
 ```

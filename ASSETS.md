@@ -20,7 +20,7 @@ For each photo added, record original filename/source, written business approval
 
 | Number | Service | User-supplied source filename | Local filename | Dimensions |
 | --- | --- | --- | --- | --- |
-| 01 | Roof / Rooftop Waterproofing | Rooftop Waterproofing1.jpg | rooftop-waterproofing.jpg | 1204 x 1600 |
+| 01 | Rooftop Waterproofing | Roof top waterproofing new.jfif | rooftop-waterproofing-new.jpg | 1080 x 933 |
 | 02 | Bathroom Waterproofing | Bathroom Waterproofing.jpg | bathroom-waterproofing.jpg | 1204 x 1600 |
 | 03 | Terrace / Balcony Waterproofing | Balcony Waterproofing1.jpg | balcony-waterproofing.jpg | 1198 x 1600 |
 | 04 | Basement Waterproofing | Basement Waterproofing.jpg | basement-waterproofing.jpg | 2048 x 1153 |
@@ -35,11 +35,11 @@ For each photo added, record original filename/source, written business approval
 | 13 | Polyurethane Coating Application | Polyurethane coating application.jfif | polyurethane-coating-application.jpg | 576 x 1280 |
 | 14 | Sand Epoxy Flooring | Sand Epoxy Flooring.jpeg | sand-epoxy-flooring.jpg | 1024 x 1536 |
 | 15 | Rooftop Heat Proofing | Rooftop Heat Proofing.jpeg | rooftop-heat-proofing.jpg | 1312 x 1199 |
-| 16 | Roof Waterproofing | Roof Waterproofing.jpeg | roof-waterproofing.jpg | 1312 x 1199 |
+| 16 | Roof Waterproofing | Roof Waterproofing (2).jpeg | roof-waterproofing-membrane.jpg | 1054 x 1492 |
 
-Sources are in `C:\Users\ASUS\Pictures`. All sixteen originals were copied byte-for-byte into both the active project's `src/assets/services/` directory and the user-requested `C:\Users\ASUS\Documents\GitHub\plan_kraft\src\assets\services` directory; SHA-256 hashes were checked against the originals. The supplied JFIF and JPEG files use `.jpg` destination filenames without re-encoding. The homepage's three previews share images and links with Epoxy Grouting, Fiber Paint Application and Polyurethane Coating Application (services 11-13), selected explicitly through `homepageServices`. The original services 01-10 remain unchanged. All sixteen services are available in the enquiry form.
+Sources are in `C:\Users\ASUS\Pictures`. All sixteen current originals were copied byte-for-byte into both the active project's `src/assets/services/` directory and the user-requested `C:\Users\ASUS\Documents\GitHub\plan_kraft\src\assets\services` directory; SHA-256 hashes were checked against the originals. The supplied JFIF and JPEG files use `.jpg` destination filenames without re-encoding. The homepage's three previews share images and links with Epoxy Grouting, Fiber Paint Application and Polyurethane Coating Application (services 11-13), selected explicitly through `homepageServices`. Service 01 was renamed to Rooftop Waterproofing and its photograph replaced at the user's request; its description and navigation ID are unchanged. All sixteen services are available in the enquiry form, with distinct Rooftop Waterproofing and Roof Waterproofing entries.
 
-Services 11 and 14 use supplied promotional posters; their image frames use a 1.4 scale to keep outdated contact banners out of view without altering the original files or the card layout. Services 15 and 16 were supplied as separate files containing identical heat-proofing artwork; each is used for its assigned service. Promotional graphics and illustrations are not presented as genuine completed-project photographs. Older unused service assets remain unreferenced.
+Services 01, 11, 14 and 16 use proportionally contained framing inside the existing card dimensions through `ServicePhoto.tsx`. Service 01 shows the complete rooftop photo. The posters show their full width and the service-content region: 1086 x 1280 for Epoxy Grouting, 1024 x 1408 for Sand Epoxy Flooring, and 1054 x 850 for Roof Waterproofing. Only outdated contact footers and, in the roof poster, the lower project/client information are excluded. No zoom transform is used, and original files remain untouched. Service 16 now uses the supplied torch-on membrane artwork, replacing its earlier duplicate heat-proofing illustration. Promotional graphics and illustrations are not presented as genuine completed-project photographs. Older unused service assets remain unreferenced.
 
 ## Completed project photographs
 

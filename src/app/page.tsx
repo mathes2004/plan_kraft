@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { ServicePhoto } from '@/components/ServicePhoto';
 import { QuoteButton, CallToAction } from '@/components/ui';
 import { homepageServices } from '@/data/services';
 import { company } from '@/data/company';
@@ -109,17 +109,7 @@ export default function Home() {
           <div className="service-preview">
             {homepageServices.map((s, i) => (
               <Link className="preview-card" key={s.id} href={`/services#${s.id}`}>
-                <div className="service-graphic service-photo">
-                  <Image
-                    src={s.image.src}
-                    alt={s.image.alt}
-                    fill
-                    sizes="(max-width: 700px) 88vw, 30vw"
-                    style={
-                      'scale' in s.image ? { transform: `scale(${s.image.scale})` } : undefined
-                    }
-                  />
-                </div>
+                <ServicePhoto image={s.image} sizes="(max-width: 700px) 88vw, 30vw" />
                 <div className="preview-body">
                   <small>0{i + 1} / WATERPROOFING</small>
                   <h3>

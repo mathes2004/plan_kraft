@@ -1,4 +1,4 @@
-import rooftopImage from '@/assets/services/rooftop-waterproofing.jpg';
+import rooftopImage from '@/assets/services/rooftop-waterproofing-new.jpg';
 import bathroomImage from '@/assets/services/bathroom-waterproofing.jpg';
 import balconyImage from '@/assets/services/balcony-waterproofing.jpg';
 import basementImage from '@/assets/services/basement-waterproofing.jpg';
@@ -13,16 +13,17 @@ import fiberPaintImage from '@/assets/services/fiber-paint-application.jpg';
 import polyurethaneImage from '@/assets/services/polyurethane-coating-application.jpg';
 import sandEpoxyImage from '@/assets/services/sand-epoxy-flooring.jpg';
 import heatProofingImage from '@/assets/services/rooftop-heat-proofing.jpg';
-import roofWaterproofingImage from '@/assets/services/roof-waterproofing.jpg';
+import roofWaterproofingImage from '@/assets/services/roof-waterproofing-membrane.jpg';
 
 export const services = [
   {
     id: 'roof',
-    title: 'Roof / Rooftop Waterproofing',
-    short: 'Rooftop waterproofing',
+    title: 'Rooftop Waterproofing',
+    short: 'Rooftop Waterproofing',
     image: {
       src: rooftopImage,
-      alt: 'Worker applying a waterproof coating to a rooftop with reinforced joints',
+      alt: 'Wide view of a waterproofed rooftop with treated column bases and parapet walls',
+      contentHeight: 933,
     },
     problem: 'Rainwater ingress, ponding and exposed roof surfaces.',
     solution:
@@ -163,7 +164,7 @@ export const services = [
     image: {
       src: epoxyGroutingImage,
       alt: 'Plan Kraft epoxy grouting service graphic showing tile-joint preparation and finishing',
-      scale: 1.4,
+      contentHeight: 1280,
     },
     problem: 'Worn, stained or missing grout in tiled surfaces and wet areas.',
     solution:
@@ -208,7 +209,7 @@ export const services = [
     image: {
       src: sandEpoxyImage,
       alt: 'Plan Kraft sand epoxy flooring graphic showing a finished floor and application stages',
-      scale: 1.4,
+      contentHeight: 1408,
     },
     problem: 'Worn or uneven floor finishes requiring a suitable protective flooring system.',
     solution:
@@ -238,14 +239,15 @@ export const services = [
     short: 'Roof Waterproofing',
     image: {
       src: roofWaterproofingImage,
-      alt: 'Roof protection illustration showing surface preparation, waterproofing and protective layers',
+      alt: 'Roof waterproofing graphic showing workers installing torch-on bituminous membranes',
+      contentHeight: 850,
     },
     problem: 'Roof leaks and water entry through exposed surfaces, joints and penetrations.',
     solution:
-      'Inspect the roof and likely leakage paths before selecting a waterproofing treatment compatible with the existing construction.',
+      'Inspect the roof and likely leakage paths before selecting a compatible waterproofing system, including torch-on membranes where appropriate.',
     benefit: 'Help protect the roof structure and the interior from rainwater ingress.',
     process:
-      'Prepare the roof, repair defects, detail vulnerable junctions and apply the selected waterproofing system.',
+      'Prepare the roof, repair defects and detail vulnerable junctions before installing and inspecting the selected membrane or coating system.',
   },
 ] as const;
 export type ServiceId = (typeof services)[number]['id'];

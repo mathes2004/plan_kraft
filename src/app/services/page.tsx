@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { ServicePhoto } from '@/components/ServicePhoto';
 import { PageIntro, QuoteButton, CallToAction } from '@/components/ui';
 import { services } from '@/data/services';
 import { metadata } from '@/lib/seo';
@@ -38,17 +38,7 @@ export default function Services() {
           <div className="services-list">
             {services.map((s, i) => (
               <article className="service-detail" id={s.id} key={s.id}>
-                <div className="service-graphic service-photo">
-                  <Image
-                    src={s.image.src}
-                    alt={s.image.alt}
-                    fill
-                    sizes="(max-width: 700px) 88vw, 45vw"
-                    style={
-                      'scale' in s.image ? { transform: `scale(${s.image.scale})` } : undefined
-                    }
-                  />
-                </div>
+                <ServicePhoto image={s.image} sizes="(max-width: 700px) 88vw, 45vw" />
                 <div>
                   <p className="eyebrow">
                     {String(i + 1).padStart(2, '0')} / WATERPROOFING & REPAIR
