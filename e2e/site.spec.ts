@@ -51,7 +51,7 @@ test('quote validation and honest delivery failure feedback', async ({ page }) =
   await expect(page.locator('#name')).toHaveAttribute('aria-invalid', 'true');
   await page.locator('#name').fill('Test Customer');
   await page.locator('#phone').fill('0771234567');
-  await page.locator('#location').fill('Batticaloa');
+  await page.locator('#location').selectOption('Batticaloa');
   await page.locator('#serviceId').selectOption('roof');
   await page.locator('#description').fill('Water is leaking through the roof.');
   await page.route('https://forminit.com/f/nilov0qnww9', (r) =>

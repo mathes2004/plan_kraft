@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { services } from '@/data/services';
+import { sriLankaDistricts } from '@/data/districts';
 export function normalizePhone(raw: string) {
   let p = raw.replace(/[\s()\-]/g, '');
   if (/^07\d{8}$/.test(p)) p = '+94' + p.slice(1);
@@ -16,7 +17,9 @@ export const quoteSchema = z.object({
       (p) => /^\+947\d{8}$/.test(p),
       'Enter a valid Sri Lankan mobile number, such as 077 123 4567.',
     ),
-  location: z.string().trim().min(2, 'Enter your district or project location.').max(200),
+  location: z.enum(sriLankaDistricts, {
+    error: 'Choose the district where your project is located.',
+  }),
   serviceId: z
     .string()
     .refine((id) => services.some((s) => s.id === id), 'Choose a waterproofing service.'),

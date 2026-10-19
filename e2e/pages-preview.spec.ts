@@ -75,20 +75,26 @@ test('static quote form sends through the free service without a local API', asy
     if (request.url().includes('/api/quote')) requests.push(request.url());
   });
   await page.goto('request-quote/?service=roof&project=Rooftop%20waterproofing');
-  await page.route('https://forminit.com/f/nilov0qnww9', (route) =>
-    route.fulfill({
+  await page.route('https://forminit.com/f/nilov0qnww9', (route) => {
+    expect(new URLSearchParams(route.request().postData() || '').get('fi-text-location')).toBe(
+      'Batticaloa',
+    );
+    return route.fulfill({
       contentType: 'application/json',
       body: JSON.stringify({ success: true, submission: { hashId: 'preview-submission-01' } }),
-    }),
-  );
+    });
+  });
   await expect(page.locator('#serviceId')).toHaveValue('roof');
   await expect(page.locator('#description')).toContainText('Rooftop waterproofing');
   await expect(page.getByRole('button', { name: 'Send Enquiry' })).toBeEnabled();
   await page.locator('#name').fill('Preview Customer');
   await page.locator('#phone').fill('0771234567');
-  await page.locator('#location').fill('Batticaloa');
+  await expect(page.getByRole('combobox', { name: 'District / project location' })).toHaveValue('');
+  await expect(page.locator('#location option')).toHaveCount(26);
+  await page.locator('#location').selectOption('Batticaloa');
   await page.getByRole('button', { name: 'Send Enquiry' }).click();
   await expect(page.getByRole('status')).toContainText('accepted');
+  await expect(page.locator('#location')).toHaveValue('');
   expect(requests).toEqual([]);
   await expect(
     page.locator('.quote-form').getByRole('link', { name: 'choose to chat on WhatsApp' }),

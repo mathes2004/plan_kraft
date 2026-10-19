@@ -3,6 +3,7 @@ import { useSearchParams } from 'next/navigation';
 import { useRef, useState, type FormEvent } from 'react';
 import { services } from '@/data/services';
 import { company } from '@/data/company';
+import { sriLankaDistricts } from '@/data/districts';
 import { quoteSchema } from '@/lib/validation/quote';
 import {
   quoteDeliveryEndpoint,
@@ -83,7 +84,7 @@ export default function QuoteForm() {
       requestAnimationFrame(() => summary.current?.focus());
     }
   }
-  const field = (id: 'name' | 'phone' | 'location', label: string, type = 'text', max = 200) => (
+  const field = (id: 'name' | 'phone', label: string, type = 'text', max = 200) => (
     <div className="field">
       <label htmlFor={id}>
         {label} <span aria-hidden="true">*</span>
@@ -145,7 +146,32 @@ export default function QuoteForm() {
         {field('name', 'Full name', 'text', 100)}
         {field('phone', 'Phone / WhatsApp number', 'tel', 40)}
       </div>
-      {field('location', 'District / project location')}
+      <div className="field">
+        <label htmlFor="location">District / project location *</label>
+        <select
+          id="location"
+          name={quoteFieldNames.location}
+          required
+          defaultValue=""
+          autoComplete="address-level1"
+          aria-invalid={!!errors.location}
+          aria-describedby={errors.location ? 'location-error' : undefined}
+        >
+          <option value="" disabled>
+            Choose a district
+          </option>
+          {sriLankaDistricts.map((district) => (
+            <option value={district} key={district}>
+              {district}
+            </option>
+          ))}
+        </select>
+        {errors.location && (
+          <p className="field-error" id="location-error">
+            {errors.location}
+          </p>
+        )}
+      </div>
       <div className="field">
         <label htmlFor="serviceId">Required service *</label>
         <select

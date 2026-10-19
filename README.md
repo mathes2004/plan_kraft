@@ -47,6 +47,8 @@ See [email notifications](https://forminit.com/docs/email-notifications/), [work
 
 ### Request and response behavior
 
+The required District / project location dropdown lists all 25 Sri Lankan districts alphabetically from `src/data/districts.ts`. Its selected value is validated against the shared list and sent in the existing `fi-text-location` field. It starts and resets with an empty ?Choose a district? placeholder.
+
 `src/lib/quote-delivery.ts` maps the existing fields to documented Forminit names: `fi-sender-fullName`, `fi-sender-phone`, `fi-text-location`, `fi-text-service`, `fi-text-message`, `fi-text-reference` and `fi-url-source`. The hidden honeypot is `_gotcha`. Browser fetch submits URL-encoded fields to `https://forminit.com/f/nilov0qnww9` with `Accept: application/json`; Forminit explicitly supports this content type. Private keys are never sent from the client.
 
 The client validates fields, normalizes Sri Lankan mobile numbers and prevents simultaneous submissions. It shows acceptance only for a successful HTTP response containing `success: true` and a submission ID. Rate limits, disabled/missing forms, exhausted quotas, malformed responses and network failures preserve entered details. The visitor stays on the website after acceptance; remote redirect URLs are not followed. Tracking references do not guarantee deduplication after uncertain responses. No enquiry contents are logged by this application.

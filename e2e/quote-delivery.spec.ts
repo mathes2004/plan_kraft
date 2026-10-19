@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
 async function fillEnquiry(page: Page) {
   await page.locator('#name').fill('Test Customer');
   await page.locator('#phone').fill('077 123 4567');
-  await page.locator('#location').fill('Batticaloa');
+  await page.locator('#location').selectOption('Batticaloa');
   await page.locator('#serviceId').selectOption('roof');
   await page.locator('#description').fill('Water is entering through the roof.');
 }
@@ -31,6 +31,7 @@ test('invalid fields and honeypot values never reach the mail service', async ({
   await page.getByRole('button', { name: 'Send Enquiry' }).click();
   await expect(page.locator('#name')).toHaveAttribute('aria-invalid', 'true');
   await expect(page.locator('#phone')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#location')).toHaveAttribute('aria-invalid', 'true');
   await expect(page.getByRole('status')).toBeFocused();
   await fillEnquiry(page);
   await page.locator('#website').evaluate((input: HTMLInputElement) => {
