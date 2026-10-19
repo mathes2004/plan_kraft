@@ -1063,16 +1063,13 @@ button:enabled:active {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  width: 64px;
   height: 64px;
   background: #126e4d;
   color: #fff;
   line-height: 1;
-  padding: 0 20px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
+  padding: 0;
+  border-radius: 50%;
   box-shadow: 0 5px 25px #123b4b25;
   z-index: 35;
 }
@@ -2664,9 +2661,8 @@ button:enabled:active {
     padding-bottom: 95px;
   }
   .floating-whatsapp {
+    width: 56px;
     height: 56px;
-    padding: 0 16px;
-    font-size: 13px;
     right: calc(16px + env(safe-area-inset-right, 0px));
     bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   }

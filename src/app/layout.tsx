@@ -63,7 +63,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               fill="currentColor"
             />
           </svg>
-          <span>{company.secondaryPhone}</span>
         </a>
         <script
           type="application/ld+json"
