@@ -143,7 +143,7 @@ test('gallery filters completed work and contact targets remain correct', async 
   ]);
   await expect(page.locator('footer a[href="tel:+94740388334"]')).toHaveCount(1);
   await expect(page.locator('footer a[href="tel:+94755183966"]')).toHaveCount(1);
-  await expect(page.locator('footer a[href="https://wa.me/94740388334"]')).toHaveCount(1);
+  await expect(page.locator('footer a[href="https://wa.me/94755183966"]')).toHaveCount(1);
 });
 test('SEO files and unknown route handling', async ({ request }) => {
   const response = await request.get('/sitemap.xml');

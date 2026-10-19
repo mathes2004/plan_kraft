@@ -42,7 +42,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <a
           className="floating-whatsapp"
           href={company.whatsapp}
-          aria-label="Chat with Plan Kraft on WhatsApp"
+          aria-label={`Chat with Plan Kraft on WhatsApp: ${company.secondaryPhone}`}
         >
           <svg
             width="28"
@@ -63,6 +63,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               fill="currentColor"
             />
           </svg>
+          <span>{company.secondaryPhone}</span>
         </a>
         <script
           type="application/ld+json"

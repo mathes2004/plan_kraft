@@ -5,7 +5,7 @@ export const company = {
   secondaryPhone: '075 518 3966',
   tel: 'tel:+94740388334',
   secondaryTel: 'tel:+94755183966',
-  whatsapp: 'https://wa.me/94740388334',
+  whatsapp: 'https://wa.me/94755183966',
   email: 'vinothvj1993@gmail.com',
   experience: 10,
   projects: 335,

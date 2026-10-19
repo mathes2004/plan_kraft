@@ -1060,20 +1060,25 @@ button:enabled:active {
   position: fixed;
   bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   right: calc(24px + env(safe-area-inset-right, 0px));
-  display: grid;
-  place-items: center;
-  width: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   height: 64px;
   background: #126e4d;
   color: #fff;
   line-height: 1;
-  padding: 0;
-  border-radius: 50%;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
   box-shadow: 0 5px 25px #123b4b25;
   z-index: 35;
 }
 .floating-whatsapp > svg {
   display: block;
+  flex-shrink: 0;
   width: 28px;
   height: 28px;
 }
@@ -2659,8 +2664,9 @@ button:enabled:active {
     padding-bottom: 95px;
   }
   .floating-whatsapp {
-    width: 56px;
     height: 56px;
+    padding: 0 16px;
+    font-size: 13px;
     right: calc(16px + env(safe-area-inset-right, 0px));
     bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   }
