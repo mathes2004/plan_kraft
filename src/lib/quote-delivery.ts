@@ -15,7 +15,8 @@ export const quoteDeliveryEndpoint = forminitEndpoint(
 export const quoteFieldNames = {
   name: 'fi-sender-fullName',
   phone: 'fi-sender-phone',
-  location: 'fi-text-location',
+  // "location" collides with Forminit's location block; use a distinct project field.
+  location: 'fi-text-projectDistrict',
   serviceId: 'fi-text-service',
   description: 'fi-text-message',
 } as const;
@@ -33,7 +34,7 @@ export function quoteEmailFields(data: z.output<typeof quoteSchema>, sourceUrl: 
   return {
     'fi-sender-fullName': data.name,
     'fi-sender-phone': data.phone,
-    'fi-text-location': data.location,
+    [quoteFieldNames.location]: data.location,
     'fi-text-service': services.find((service) => service.id === data.serviceId)!.title,
     'fi-text-message': data.description,
     'fi-text-reference': data.submissionId,

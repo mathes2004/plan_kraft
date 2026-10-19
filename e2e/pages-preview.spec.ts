@@ -76,9 +76,9 @@ test('static quote form sends through the free service without a local API', asy
   });
   await page.goto('request-quote/?service=roof&project=Rooftop%20waterproofing');
   await page.route('https://forminit.com/f/nilov0qnww9', (route) => {
-    expect(new URLSearchParams(route.request().postData() || '').get('fi-text-location')).toBe(
-      'Batticaloa',
-    );
+    expect(
+      new URLSearchParams(route.request().postData() || '').get('fi-text-projectDistrict'),
+    ).toBe('Batticaloa');
     return route.fulfill({
       contentType: 'application/json',
       body: JSON.stringify({ success: true, submission: { hashId: 'preview-submission-01' } }),

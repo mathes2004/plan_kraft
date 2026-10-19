@@ -28,7 +28,7 @@ describe('Forminit delivery contract', () => {
     for (const [name, value] of Object.entries({
       'fi-sender-fullName': 'Test Customer',
       'fi-sender-phone': '077 123 4567',
-      'fi-text-location': 'Batticaloa',
+      'fi-text-projectDistrict': 'Batticaloa',
       'fi-text-service': 'roof',
       'fi-text-message': 'Please inspect a leak in the roof.',
       _gotcha: '',
@@ -46,7 +46,7 @@ describe('Forminit delivery contract', () => {
     expect(fields).toEqual({
       'fi-sender-fullName': 'Test Customer',
       'fi-sender-phone': '+94771234567',
-      'fi-text-location': 'Batticaloa',
+      'fi-text-projectDistrict': 'Batticaloa',
       'fi-text-service': 'Roof / Rooftop Waterproofing',
       'fi-text-message': 'Please inspect a leak in the roof.',
       'fi-text-reference': parsed.submissionId,

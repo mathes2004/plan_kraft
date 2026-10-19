@@ -78,7 +78,7 @@ test('Send delivers every field to the configured Forminit form and prevents con
   expect(payloads[0]).toMatchObject({
     'fi-sender-fullName': 'Test Customer',
     'fi-sender-phone': '+94771234567',
-    'fi-text-location': 'Batticaloa',
+    'fi-text-projectDistrict': 'Batticaloa',
     'fi-text-service': 'Roof / Rooftop Waterproofing',
     'fi-text-message': 'Water is entering through the roof.',
     _gotcha: '',
