@@ -131,16 +131,17 @@ test('process respects reduced motion and pauses when hidden', async ({ page }) 
 });
 test('gallery filters completed work and contact targets remain correct', async ({ page }) => {
   await page.goto('/projects');
-  await expect(page.locator('.project-image')).toHaveCount(6);
+  await expect(page.locator('.project-image')).toHaveCount(12);
   await page.getByRole('button', { name: /^Bathroom Waterproofing/ }).click();
   await expect(page.getByRole('button', { name: /^Bathroom Waterproofing/ })).toHaveAttribute(
     'aria-pressed',
     'true',
   );
-  await expect(page.locator('.project-image')).toHaveCount(2);
+  await expect(page.locator('.project-image')).toHaveCount(3);
   await expect(page.locator('.project-card .project-title')).toHaveText([
     'Bathroom waterproofing',
     'Rooftop & bathroom waterproofing',
+    'Bathroom waterproofing in Ampara',
   ]);
   await expect(page.locator('footer a[href="tel:+94740388334"]')).toHaveCount(1);
   await expect(page.locator('footer a[href="tel:+94755183966"]')).toHaveCount(1);

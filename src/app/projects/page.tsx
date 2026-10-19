@@ -32,7 +32,7 @@ export default function Projects() {
           <div className="portfolio-intro-foot">
             <span>ON SITE. IN DETAIL.</span>
             <span>
-              BATTICALOA & AMPARA <span aria-hidden="true">↗</span>
+              BATTICALOA · AMPARA · TRINCOMALEE <span aria-hidden="true">↗</span>
             </span>
           </div>
         </div>

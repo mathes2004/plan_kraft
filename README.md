@@ -1,6 +1,6 @@
 ﻿# PLAN KRAFT — Waterproofing Solutions
 
-Seven-page business website built with Next.js App Router, TypeScript and React. Includes ten services, six completed projects with local photo galleries, a real-photo comparison slider, an interactive homepage house animation, an eight-stage work process and a quote form.
+Seven-page business website built with Next.js App Router, TypeScript and React. Includes ten services, twelve completed projects with local photo galleries, a real-photo comparison slider, an interactive homepage house animation, an eight-stage work process and a quote form.
 
 ## Run locally
 
@@ -114,7 +114,7 @@ Routes: `/`, `/services`, `/about`, `/projects`, `/work-process`, `/contact`, `/
 
 Copy every future user-supplied image into `src/assets/`, preserve its original contents and reference it through a static import. Never reference a Windows path or `/src/assets/...` as a browser URL. Add its source, dimensions and intended use to `ASSETS.md`. Service images are shared between the Services page and corresponding homepage previews.
 
-The six projects (335, 333, 318, 316, 314 and 310) use seventeen supplied photographs with category filters, captions, accessible galleries and project-specific enquiry links. Descriptions omit client identities and street addresses. Warranty details retain the terms note. Only records with genuine approved photographs marked as published render; up to three can be featured on the homepage.
+The twelve projects (335, 333, 318, 316, 314, 310, 331, 323, 313, 306, 302 and 299) use thirty-two supplied photographs with category filters, captions, accessible galleries and project-specific enquiry links. Descriptions omit client identities and street addresses. Warranty details retain the terms note. Only records with genuine approved photographs marked as published render; up to three can be featured on the homepage. Keep all existing and future project images in `src/assets/projects/<project-number>/` and import them through `src/data/projects.ts`.
 
 The homepage comparison uses the supplied exterior photos from different viewpoints of the same project. The divider starts at 50%; moving right reveals more BEFORE and moving left reveals more AFTER. Mouse, touch, keyboard and reduced motion are supported.
 

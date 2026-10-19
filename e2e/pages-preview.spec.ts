@@ -46,9 +46,9 @@ test('client navigation, gallery photos and reloads work without a server', asyn
   await expect(banner.locator('canvas[data-engine="three.js r169"]')).toBeVisible();
   await page.locator('main').getByRole('link', { name: 'Explore Our Projects' }).click();
   await expect(page).toHaveURL(/\/plan_kraft\/projects\/$/);
-  await expect(page.locator('.project-card')).toHaveCount(6);
+  await expect(page.locator('.project-card')).toHaveCount(12);
   await page.reload();
-  await expect(page.locator('.project-card')).toHaveCount(6);
+  await expect(page.locator('.project-card')).toHaveCount(12);
   await page.getByRole('button', { name: 'Open Epoxy grout restoration gallery' }).click();
   const gallery = page.getByRole('dialog');
   await expect(gallery).toBeVisible();

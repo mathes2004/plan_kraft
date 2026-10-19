@@ -4,7 +4,7 @@ Store all user-provided images here, including future uploads. Keep originals in
 
 - `services/`: ten current service photographs, mapped in `src/data/services.ts` for the Services page and homepage previews. Older unused images remain unreferenced.
 - `before-after/`: the original exterior comparison pair used on the homepage.
-- `projects/`: original site photographs for projects 335 (bathroom), 333 (rooftop), 318 (epoxy grout restoration), 316 (sump-tank waterbar), 314 (rooftop and bathroom) and 310 (sump-tank waterproofing), grouped by project number. Add future portfolio images here too.
+- `projects/`: all 32 original site photographs for the twelve published projects, grouped by project number. Store every future portfolio photo in `projects/<project-number>/`; see `projects/README.md`.
 
 Reference images through static imports, never a local computer path or a `/src/assets/` URL:
 

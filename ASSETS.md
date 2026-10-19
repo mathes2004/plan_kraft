@@ -6,7 +6,7 @@
 | Interactive homepage house | https://plan-kraft-roof-protection.socialrook16.chatgpt.site/ | User-requested reference banner; house scene and renderer copied locally, controls and layout adapted | Home banner in `public/banner/`; Three.js r169 and font licenses included beside local dependencies |
 | Rooftop architectural illustration | Repository-native SVG in `src/components/ui.tsx` | Illustration only | Fallback when no approved rooftop project photograph is available |
 | Service images 01-10 | Ten numbered local image files supplied by the user, listed below | User-requested replacements and new External Wall service photograph, copied without modifying their contents | `src/assets/services/`; shared static imports in `src/data/services.ts` for the Services page and homepage previews |
-| Genuine project photos | Seventeen originals supplied by the user for projects 335, 333, 318, 316, 314 and 310 | Explicitly authorized for publication in the user's project-showcase requests | `src/assets/projects/`; six Projects page showcases; the original three featured records remain on the homepage; completed rooftop photograph also used on About |
+| Genuine project photos | Thirty-two originals supplied by the user for twelve projects, listed below | Explicitly authorized for publication in the user's project-showcase requests | `src/assets/projects/<project-number>/`; twelve Projects page showcases; the original three featured records remain on the homepage; completed rooftop photograph also used on About |
 | Exterior BEFORE photograph | User-provided `832835973_1068602759141192_771004835693052204_n.jpg` | User-approved for homepage comparison; original 2048 x 1153 photo copied without modification | `src/assets/before-after/exterior-before.jpg` |
 | Exterior AFTER photograph | User-provided `830540272_1068600839141384_144411095039607790_n.jpg` | User-approved for homepage comparison; original 1672 x 941 photo copied without modification | `src/assets/before-after/exterior-after.jpg` |
 | Homepage before/after pair | The two original exterior photographs supplied by the user | Same project viewed from different angles; caption explains the viewpoints. No locations, dates or product details inferred | `homepageComparison` in `src/data/projects.ts`; homepage comparison only |
@@ -34,7 +34,7 @@ Sources are in `C:\Users\ASUS\Pictures`. All ten originals were copied byte-for-
 
 ## Completed project photographs
 
-The user supplied all seventeen photographs from their Pictures folder and explicitly requested that they be added to the project showcase. Each was copied byte-for-byte; SHA-256 hashes were checked against the originals. All destinations below are relative to `src/assets/projects/` and are statically imported by `src/data/projects.ts`.
+The user supplied all thirty-two photographs from their Pictures folder and explicitly requested that they be added to the project showcase. Each was copied byte-for-byte; SHA-256 hashes were checked against the originals. All destinations below are relative to `src/assets/projects/` and are statically imported by `src/data/projects.ts`. All 32 project photographs are also saved under `C:\Users\ASUS\Documents\GitHub\plan_kraft\src\assets\projects`. Store every future project image in this shared project-assets folder, grouped by project number.
 
 | Project | Original filename | Destination | Dimensions | Use / caption |
 | --- | --- | --- | --- | --- |
@@ -55,7 +55,24 @@ The user supplied all seventeen photographs from their Pictures folder and expli
 | 310 | 6-3.jpg | 310/sump-base-surface-preparation.jpg | 2048 x 1153 | Concrete base preparation |
 | 310 | img6-1.jpg | 310/sump-base-reinforcement.jpg | 1280 x 963 | Base reinforcement and coating |
 | 310 | img6-2.jpg | 310/sump-base-coating-application.jpg | 1204 x 1600 | Waterproof coating application; cover |
+| 331 | 7-1.jpg | 331/external-wall-surface-treatment.jpg | 2048 x 1153 | External wall surface treatment |
+| 331 | 7-2.jpg | 331/external-wall-application-overview.jpg | 2048 x 1153 | Exterior work in progress |
+| 331 | 7-3.jpg | 331/external-wall-completed-finish.jpg | 1672 x 941 | Completed exterior finish; cover |
+| 323 | 8-1.jpg | 323/bathroom-coated-wall-junctions.jpg | 900 x 1600 | Coated walls and junctions |
+| 323 | 8-2.jpg | 323/bathroom-completed-waterproofing.jpg | 900 x 1600 | Completed bathroom waterproofing; cover |
+| 313 | 9-1.jpg | 313/rooftop-coated-surface.jpg | 1280 x 576 | Coated rooftop surface; cover |
+| 313 | 9-2.jpg | 313/rooftop-junction-reinforcement.jpg | 1204 x 1600 | Rooftop joint reinforcement |
+| 313 | 9-3.jpg | 313/rooftop-coating-application.jpg | 720 x 1600 | Waterproof coating application |
+| 306 | 10-2.jpg | 306/tank-waterproofed-interior.jpg | 1204 x 1600 | Coated tank interior; cover |
+| 306 | 10-3.jpg | 306/tank-wall-junction-detail.jpg | 1204 x 1600 | Tank wall and base junctions |
+| 302 | 11-1.jpg | 302/external-wall-scaffold-access.jpg | 1204 x 1600 | Exterior wall work and access |
+| 302 | 11-2.jpg | 302/external-wall-coating-application.jpg | 1600 x 1204 | External wall coating application; cover |
+| 302 | 11-3.jpg | 302/external-wall-surface-preparation.jpg | 720 x 1600 | External wall surface preparation |
+| 299 | 12-1.jpg | 299/lift-well-wall-coating.jpg | 1600 x 720 | Concrete wall coating application; cover |
+| 299 | 12-2.jpg | 299/lift-well-exterior-coating.jpg | 720 x 1600 | Exterior concrete wall treatment |
 
 Descriptions were edited from the supplied posts, checked against the visible photographs, and limited to relevant project details. Client identities, street addresses and personal contact details are omitted. Only the city is retained. Generic rooftop/coating boilerplate was removed from the bathroom and waterbar records. The supplied project-specific 10-year warranty is displayed with a terms note. No project completion dates, tank dimensions, testing results or additional performance claims were inferred. These stage photographs are presented as galleries rather than matched before/after images.
 
 Project 318 has no stated duration or warranty; both are omitted. Its category is Epoxy Grout Restoration and its enquiry uses the existing terrace service, matching the pictured tiled terrace. Project 314 is included in both Rooftop and Bathroom filters; its two supplied photographs show rooftop preparation and coating only. Project 310 describes sump-tank base preparation, reinforcement and coating rather than the post's copied rooftop boilerplate. The 318 and 310 cover photos show work in progress within projects reported completed by the user, and their captions describe the visible stages. Original brand/date watermarks remain unchanged. No EXIF metadata was present in the eight new files.
+
+The six added projects (331, 323, 313, 306, 302 and 299) retain only the supplied city, material names, duration, coverage and project-specific warranty. Generic rooftop text was corrected for the external wall, tank and lift-well work. Project 331 covers 3,360 sq ft and has a five-year warranty; project 302 also has a five-year warranty. The other four supplied projects have ten-year warranties, displayed with the existing terms note. The 302 and 299 cover photographs show coating work in progress within projects the user reported completed. Project 299 uses the Basement Waterproofing enquiry option for its below-ground scope. None of the new photos are presented as paired before/after comparisons, and the original homepage featured projects are preserved.
