@@ -2,6 +2,7 @@
 
 Store all user-provided images here, including future uploads. Keep originals in descriptive subfolders:
 
+- `brand/`: the original `plan-kraft-logo.jpg`, copied unchanged from the user's `logo.jpg` and shared by the header and footer.
 - `services/`: ten current service photographs, mapped in `src/data/services.ts` for the Services page and homepage previews. Older unused images remain unreferenced.
 - `before-after/`: the original exterior comparison pair used on the homepage.
 - `projects/`: all 32 original site photographs for the twelve published projects, grouped by project number. Store every future portfolio photo in `projects/<project-number>/`; see `projects/README.md`.

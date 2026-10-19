@@ -268,54 +268,24 @@ button:enabled:active {
   flex-shrink: 0;
 }
 .brand-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-.brand-logo .brand-logo-mark {
-  width: 48px;
-  height: 49px;
-  flex-shrink: 0;
-  stroke: none;
-}
-.brand-logo .brand-logo-type {
-  font-family: 'DM Sans Variable', Arial, sans-serif;
-  font-size: 27px;
-  font-weight: 800;
-  line-height: 1.02;
-  color: #7d9818;
-  letter-spacing: -1.2px;
-}
-.brand-logo .brand-logo-type > span {
-  color: #004b73;
-  font-weight: 500;
-}
-.brand-logo .brand-logo-type small {
   display: block;
-  color: #004b73;
-  font-size: 7px;
-  letter-spacing: 1.25px;
-  font-weight: 500;
-  margin-top: 6px;
+  position: relative;
+  width: 104px;
+  aspect-ratio: 580 / 450;
+  overflow: hidden;
 }
-@media (max-width: 700px) {
-  .brand-logo .brand-logo-mark {
-    width: 40px;
-  }
-  .brand-logo .brand-logo-type {
-    font-size: 23px;
-  }
-  .brand-logo .brand-logo-type small {
-    font-size: 6px;
-    letter-spacing: 1px;
-  }
+.brand-logo img {
+  /* Frame the artwork at x=250, y=40, w=580, h=450 without altering the original. */
+  position: absolute;
+  left: -43.103448%;
+  top: -8.888889%;
+  width: 186.206897%;
+  height: auto;
+  max-width: none;
 }
-.brand img {
-  width: 154px;
-  height: 88px;
-  object-fit: contain;
+.footer-brand .brand-logo {
+  width: 200px;
+  max-width: 100%;
 }
 .brand-fallback {
   display: block;
@@ -2457,9 +2427,8 @@ button:enabled:active {
   .brand-fallback strong {
     font-size: 24px;
   }
-  .brand img {
-    height: 68px;
-    width: 135px;
+  .brand .brand-logo {
+    width: 88px;
   }
   .hero {
     grid-template-columns: 1fr;

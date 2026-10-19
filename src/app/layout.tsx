@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: { default: 'PLAN KRAFT | Waterproofing Solutions Sri Lanka', template: '%s | PLAN KRAFT' },
   description: `Professional waterproofing and building protection in Sri Lanka. ${company.experience} years of experience. Free site inspection and quotation.`,
   robots: { index: indexable, follow: indexable },
+  icons: {
+    icon: { url: withBasePath('/brand/plan-kraft-icon.svg'), type: 'image/svg+xml' },
+  },
 };
 export default function Layout({ children }: { children: React.ReactNode }) {
   const data = {

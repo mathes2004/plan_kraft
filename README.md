@@ -118,7 +118,7 @@ The twelve projects (335, 333, 318, 316, 314, 310, 331, 323, 313, 306, 302 and 2
 
 The homepage comparison uses the supplied exterior photos from different viewpoints of the same project. The divider starts at 50%; moving right reveals more BEFORE and moving left reveals more AFTER. Mouse, touch, keyboard and reduced motion are supported.
 
-The homepage uses the selected reference site's Three.js house animation inside `public/banner/`, with local renderer, dependencies, fonts and licenses. Its rain, before/after, rotation and protective-layer controls need WebGL; an illustration fallback is available. The work-process model is a separate CSS scene. Fonts are hosted locally through Fontsource. The shared logo follows the supplied reference.
+The homepage uses the selected reference site's Three.js house animation inside `public/banner/`, with local renderer, dependencies, fonts and licenses. Its rain, before/after, rotation and protective-layer controls need WebGL; an illustration fallback is available. The work-process model is a separate CSS scene. Fonts are hosted locally through Fontsource. The header and footer share the user's unchanged original logo from `src/assets/brand/plan-kraft-logo.jpg`; the browser icon embeds the same image.
 
 ## Handover
 
