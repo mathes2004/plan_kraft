@@ -7,6 +7,7 @@ import Gallery from '@/components/Gallery';
 import BeforeAfter from '@/components/BeforeAfter';
 import { homepageComparison } from '@/data/projects';
 import { metadata } from '@/lib/seo';
+import { withBasePath } from '@/lib/paths';
 export const generateMetadata = () =>
   metadata(
     'Waterproofing Solutions Sri Lanka',
@@ -54,7 +55,7 @@ export default function Home() {
         <div className="hero-visual">
           <iframe
             className="hero-animation"
-            src="/banner/index.html"
+            src={withBasePath('/banner/index.html')}
             title="Interactive 3D house: compare roof protection, explore layers, and control the rain"
           />
         </div>

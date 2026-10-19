@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Plan Kraft: sync to GitHub now",
+      "type": "process",
+      "command": "node",
+      "args": ["scripts/auto-sync.mjs", "--once"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Plan Kraft: pause automatic GitHub sync",
+      "type": "process",
+      "command": "node",
+      "args": ["scripts/auto-sync.mjs", "--pause"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    }
+  ]
+}

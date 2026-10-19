@@ -1,19 +1,16 @@
 'use client';
-import Script from 'next/script';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 import { services } from '@/data/services';
 import { company } from '@/data/company';
 import { quoteSchema } from '@/lib/validation/quote';
-declare global {
-  interface Window {
-    turnstile?: {
-      render: (el: HTMLElement, options: Record<string, unknown>) => string;
-      reset: (id: string) => void;
-      remove: (id: string) => void;
-    };
-  }
-}
+import {
+  quoteDeliveryEndpoint,
+  quoteDeliveryResult,
+  quoteEmailFields,
+  quoteFormAction,
+} from '@/lib/quote-delivery';
+
 export default function QuoteForm() {
   const query = useSearchParams();
   const requested = query.get('service') || '';
@@ -21,40 +18,24 @@ export default function QuoteForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<{ ok: boolean; message: string } | null>(null);
-  const [token, setToken] = useState('');
-  const [scriptReady, setScriptReady] = useState(false);
   const summary = useRef<HTMLDivElement>(null);
   const form = useRef<HTMLFormElement>(null);
-  const challenge = useRef<HTMLDivElement>(null);
-  const widget = useRef<string | null>(null);
   const submission = useRef('');
   const previous = useRef('');
   const inFlight = useRef(false);
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
-  useEffect(() => {
-    if (!siteKey || !scriptReady || !challenge.current || !window.turnstile) return;
-    widget.current = window.turnstile.render(challenge.current, {
-      sitekey: siteKey,
-      callback: (t: string) => setToken(t),
-      'expired-callback': () => setToken(''),
-      'error-callback': () => setToken(''),
-    });
-    return () => {
-      if (widget.current) window.turnstile?.remove(widget.current);
-    };
-  }, [scriptReady, siteKey]);
+
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (inFlight.current) return;
     setResult(null);
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    const formValues = Object.fromEntries(new FormData(e.currentTarget));
+    const data = { ...formValues, website: formValues._honey || '' };
     const content = JSON.stringify(data);
     if (previous.current !== content || !submission.current) {
       submission.current = crypto.randomUUID();
       previous.current = content;
     }
-    const payload = { ...data, challengeToken: token, submissionId: submission.current };
-    const parsed = quoteSchema.safeParse(payload);
+    const parsed = quoteSchema.safeParse({ ...data, submissionId: submission.current });
     if (!parsed.success) {
       const fields: Record<string, string> = {};
       for (const issue of parsed.error.issues) fields[String(issue.path[0])] = issue.message;
@@ -66,15 +47,17 @@ export default function QuoteForm() {
     setBusy(true);
     inFlight.current = true;
     try {
-      const response = await fetch('/api/quote', {
+      const response = await fetch(quoteDeliveryEndpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(
+          quoteEmailFields(parsed.data, window.location.origin + window.location.pathname),
+        ),
+        signal: AbortSignal.timeout(20000),
       });
-      const body = await response.json();
-      setResult({ ok: response.ok, message: body.message });
-      if (body.fieldErrors) setErrors(body.fieldErrors);
-      if (response.ok) {
+      const delivery = quoteDeliveryResult(response.ok, await response.json());
+      setResult(delivery);
+      if (delivery.ok) {
         form.current?.reset();
         submission.current = '';
         previous.current = '';
@@ -82,13 +65,12 @@ export default function QuoteForm() {
     } catch {
       setResult({
         ok: false,
-        message: 'We could not send your enquiry. Please try again or contact us on WhatsApp.',
+        message:
+          'We could not confirm your enquiry. Your details have been kept; please try again or contact us on WhatsApp.',
       });
     } finally {
       inFlight.current = false;
       setBusy(false);
-      setToken('');
-      if (widget.current) window.turnstile?.reset(widget.current);
       requestAnimationFrame(() => summary.current?.focus());
     }
   }
@@ -115,7 +97,17 @@ export default function QuoteForm() {
     </div>
   );
   return (
-    <form ref={form} className="quote-form" onSubmit={submit} noValidate aria-busy={busy}>
+    <form
+      ref={form}
+      className="quote-form"
+      action={quoteFormAction}
+      method="POST"
+      onSubmit={submit}
+      noValidate
+      aria-busy={busy}
+    >
+      <input type="hidden" name="_subject" value="PLAN KRAFT - New quotation enquiry" />
+      <input type="hidden" name="_template" value="table" />
       <p className="small">All fields marked * are required.</p>
       {(Object.keys(errors).length > 0 || result) && (
         <div
@@ -187,19 +179,10 @@ export default function QuoteForm() {
       </div>
       <div className="honeypot" aria-hidden="true">
         <label htmlFor="website">Leave this field empty</label>
-        <input id="website" name="website" tabIndex={-1} autoComplete="off" />
+        <input id="website" name="_honey" tabIndex={-1} autoComplete="off" />
       </div>
-      {siteKey && (
-        <>
-          <Script
-            src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-            onReady={() => setScriptReady(true)}
-          />
-          <div ref={challenge} />
-        </>
-      )}
       <p className="small">Your details are used to respond to this enquiry.</p>
-      <button className="button" type="submit" disabled={busy || (!!siteKey && !token)}>
+      <button className="button" type="submit" disabled={busy}>
         {busy ? 'Sending enquiry…' : 'Send Enquiry'} <span>↗</span>
       </button>
       <p className="small">

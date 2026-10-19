@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'DM Sans';
-  src: url('/banner/assets/dm-sans-latin.woff2') format('woff2');
+  src: url('./assets/dm-sans-latin.woff2') format('woff2');
   font-weight: 100 1000;
   font-display: swap;
 }

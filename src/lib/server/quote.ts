@@ -1,8 +1,8 @@
 import 'server-only';
 import { createHash } from 'node:crypto';
 import { quoteSchema } from '@/lib/validation/quote';
-import { company } from '@/data/company';
 import { services } from '@/data/services';
+const QUOTE_RECIPIENT = 'mathesmathes20005@gmail.com';
 const LIMIT = 16 * 1024;
 function reply(
   status: number,
@@ -93,7 +93,7 @@ export async function handleQuote(request: Request) {
     !redis ||
     !redis.startsWith('https://') ||
     !redisToken ||
-    (process.env.QUOTE_TO_EMAIL && process.env.QUOTE_TO_EMAIL !== company.email) ||
+    (process.env.QUOTE_TO_EMAIL && process.env.QUOTE_TO_EMAIL !== QUOTE_RECIPIENT) ||
     Boolean(challengeSecret) !== Boolean(challengeSite)
   )
     return reply(
@@ -195,7 +195,7 @@ export async function handleQuote(request: Request) {
       },
       body: JSON.stringify({
         from,
-        to: [company.email],
+        to: [QUOTE_RECIPIENT],
         subject: 'PLAN KRAFT — New quotation enquiry',
         text,
         html,

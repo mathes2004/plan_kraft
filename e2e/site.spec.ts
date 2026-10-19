@@ -45,7 +45,7 @@ test('process has no autoplay and obeys its controls', async ({ page }) => {
   await page.getByRole('button', { name: 'Replay ↺' }).click();
   await expect(page.getByRole('button', { name: /Play/ })).toBeEnabled();
 });
-test('quote validation and honest unavailable feedback', async ({ page }) => {
+test('quote validation and honest delivery failure feedback', async ({ page }) => {
   await page.goto('/request-quote');
   await page.getByRole('button', { name: 'Send Enquiry' }).click();
   await expect(page.locator('#name')).toHaveAttribute('aria-invalid', 'true');
@@ -54,15 +54,15 @@ test('quote validation and honest unavailable feedback', async ({ page }) => {
   await page.locator('#location').fill('Batticaloa');
   await page.locator('#serviceId').selectOption('roof');
   await page.locator('#description').fill('Water is leaking through the roof.');
-  await page.route('**/api/quote', (r) =>
+  await page.route('https://formsubmit.co/ajax/mathesmathes20005@gmail.com', (r) =>
     r.fulfill({
       status: 503,
       contentType: 'application/json',
-      body: JSON.stringify({ ok: false, message: 'Online enquiries are not configured yet.' }),
+      body: JSON.stringify({ success: false, message: 'Service temporarily unavailable.' }),
     }),
   );
   await page.getByRole('button', { name: 'Send Enquiry' }).click();
-  await expect(page.getByRole('status')).toContainText('not configured');
+  await expect(page.getByRole('status')).toContainText('could not confirm');
   await expect(page.locator('#name')).toHaveValue('Test Customer');
 });
 test('mobile menu supports Escape and restores focus', async ({ page }, info) => {

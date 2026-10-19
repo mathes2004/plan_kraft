@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { company } from '@/data/company';
 import { origin, indexable } from '@/lib/seo';
+import { withBasePath } from '@/lib/paths';
 import '@fontsource-variable/manrope';
 import '@fontsource-variable/dm-sans';
 import './globals.css';
@@ -17,7 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     '@context': 'https://schema.org',
     '@type': 'HomeAndConstructionBusiness',
     name: company.name,
-    url: origin,
+    url: new URL(withBasePath('/'), origin).href,
     telephone: company.tel.slice(4),
     email: company.email,
     address: {
