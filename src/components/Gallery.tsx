@@ -82,17 +82,9 @@ export default function Gallery({ featured = false }: { featured?: boolean }) {
             {[['all', 'All projects'], ...categories.map((c) => [c, c])].map(([id, label]) => (
               <button key={id} aria-pressed={filter === id} onClick={() => setFilter(id)}>
                 {label}
-                <span>
-                  {id === 'all'
-                    ? publishedProjects.length
-                    : publishedProjects.filter((p) => matchesProjectCategory(p, id)).length}
-                </span>
               </button>
             ))}
           </div>
-          <p className="portfolio-count" role="status">
-            {list.length.toString().padStart(2, '0')} {list.length === 1 ? 'project' : 'projects'}
-          </p>
         </div>
       )}
 

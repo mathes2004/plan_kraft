@@ -4,6 +4,7 @@ test('projects show the supplied details and category filters', async ({ page })
   await page.goto('projects/');
   await expect(page.locator('.project-card')).toHaveCount(12);
   await expect(page.locator('.project-contact-sheet button')).toHaveCount(32);
+  await expect(page.locator('.portfolio-toolbar')).not.toContainText(/\d/);
   await expect(page.locator('.project-grid')).not.toContainText(/PROJECT\s*\/\s*\d+/i);
   await expect(page.locator('.portfolio-intro-foot')).not.toContainText(
     /completed projects|site photographs/,
