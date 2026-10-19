@@ -5,7 +5,7 @@
 | User-selected reference logo | https://plan-kraft-roof-protection.socialrook16.chatgpt.site/ | Copied unchanged SVG paths and matching wordmark styling, as requested | Shared `BrandLogo.tsx` in header and footer |
 | Interactive homepage house | https://plan-kraft-roof-protection.socialrook16.chatgpt.site/ | User-requested reference banner; house scene and renderer copied locally, controls and layout adapted | Home banner in `public/banner/`; Three.js r169 and font licenses included beside local dependencies |
 | Rooftop architectural illustration | Repository-native SVG in `src/components/ui.tsx` | Illustration only | Fallback when no approved rooftop project photograph is available |
-| Service images 01-09 | Nine numbered local image files supplied by the user, listed below | Retired from the website at the user's request; originals retained locally pending replacement photos | `src/assets/services/`; no active imports or rendered service photos |
+| Service images 01-10 | Ten numbered local image files supplied by the user, listed below | User-requested replacements and new External Wall service photograph, copied without modifying their contents | `src/assets/services/`; shared static imports in `src/data/services.ts` for the Services page and homepage previews |
 | Genuine project photos | Seventeen originals supplied by the user for projects 335, 333, 318, 316, 314 and 310 | Explicitly authorized for publication in the user's project-showcase requests | `src/assets/projects/`; six Projects page showcases; the original three featured records remain on the homepage; completed rooftop photograph also used on About |
 | Exterior BEFORE photograph | User-provided `832835973_1068602759141192_771004835693052204_n.jpg` | User-approved for homepage comparison; original 2048 x 1153 photo copied without modification | `src/assets/before-after/exterior-before.jpg` |
 | Exterior AFTER photograph | User-provided `830540272_1068600839141384_144411095039607790_n.jpg` | User-approved for homepage comparison; original 1672 x 941 photo copied without modification | `src/assets/before-after/exterior-after.jpg` |
@@ -19,17 +19,18 @@ For each photo added, record original filename/source, written business approval
 
 | Number | Service | User-supplied source filename | Local filename | Dimensions |
 | --- | --- | --- | --- | --- |
-| 01 | Roof / Rooftop Waterproofing | Rooftop waterproofing.webp | rooftop-waterproofing.webp | 1024 x 768 |
-| 02 | Bathroom Waterproofing | Bathroom Waterproofing.webp | bathroom-waterproofing.webp | 720 x 960 |
-| 03 | Terrace / Balcony Waterproofing | Balcony Waterproofing.jpg | balcony-waterproofing.jpg | 1024 x 768 |
+| 01 | Roof / Rooftop Waterproofing | Rooftop Waterproofing1.jpg | rooftop-waterproofing.jpg | 1204 x 1600 |
+| 02 | Bathroom Waterproofing | Bathroom Waterproofing.jpg | bathroom-waterproofing.jpg | 1204 x 1600 |
+| 03 | Terrace / Balcony Waterproofing | Balcony Waterproofing1.jpg | balcony-waterproofing.jpg | 1198 x 1600 |
 | 04 | Basement Waterproofing | Basement Waterproofing.jpg | basement-waterproofing.jpg | 2048 x 1153 |
-| 05 | Water Tank Waterproofing | Water Tank Waterproofing.jfif | water-tank-waterproofing.jpg | 499 x 375 |
-| 06 | Swimming Pool Waterproofing | Swimming Pool Waterproofing.jfif | swimming-pool-waterproofing.jpg | 447 x 447 |
-| 07 | Concrete Crack Repair | Concrete Crack Repair.jfif | concrete-crack-repair.jpg | 405 x 389 |
-| 08 | Wall Leakage / Dampness Treatment | Dampness Treatment.jfif | dampness-treatment.jpg | 547 x 365 |
+| 05 | Water Tank Waterproofing | Water Tank Waterproofing.jpg | water-tank-waterproofing.jpg | 1200 x 1600 |
+| 06 | Swimming Pool Waterproofing | Swimming Pool Waterproofing.jfif | swimming-pool-waterproofing.jpg | 387 x 516 |
+| 07 | Concrete Crack Repair | Concrete Crack Repair.jpg | concrete-crack-repair.jpg | 1198 x 1600 |
+| 08 | Wall Leakage / Dampness Treatment | Wall Leakage.jpg | wall-leakage.jpg | 1280 x 576 |
 | 09 | Commercial / Industrial Waterproofing | Industrial Waterproofing.jfif | industrial-waterproofing.jpg | 516 x 387 |
+| 10 | External Wall Waterproofing | Exernal Wall Waterproofing.jpg | external-wall-waterproofing.jpg | 1600 x 1204 |
 
-The supplied JFIF files contain JPEG images and are copied byte-for-byte with `.jpg` filenames. All nine images above have been removed from the Services page and the shared homepage previews pending the user's new photographs. Numbered panels preserve the layout in the meantime. Copy replacement photographs into `src/assets/services/` and restore a shared image mapping in `src/data/services.ts` when the user supplies their paths.
+Sources are in `C:\Users\ASUS\Pictures`. All ten originals were copied byte-for-byte into both the active project's `src/assets/services/` directory and the user-requested `C:\Users\ASUS\Documents\GitHub\plan_kraft\src\assets\services` directory; SHA-256 hashes were checked against the originals. The supplied JFIF files contain JPEG data and use `.jpg` destination filenames without re-encoding. The homepage's three previews share the Rooftop, Bathroom and Balcony images from services 01-03. Service 10 adds External Wall Waterproofing and is available in the enquiry form. Older unused service assets remain unreferenced. These service photographs are not automatically presented as completed portfolio projects.
 
 ## Completed project photographs
 

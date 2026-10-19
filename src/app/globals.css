@@ -650,12 +650,8 @@ button:enabled:active {
   display: grid;
   place-items: center;
 }
-.service-image-placeholder > span {
-  color: #b3cdd3;
-  font-size: clamp(80px, 10vw, 140px);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.06em;
+.service-photo img {
+  object-fit: cover;
 }
 .graphic-building {
   width: 160px;

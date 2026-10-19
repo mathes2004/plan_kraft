@@ -26,11 +26,12 @@ test('home has the required sections and no process model', async ({ page }) => 
   await expect(page.locator('footer')).toHaveCount(1);
   await expect(page.locator('.process-scene')).toHaveCount(0);
 });
-test('all nine services have quote links', async ({ page }) => {
+test('all ten services have quote links', async ({ page }) => {
   await page.goto('/services');
-  await expect(page.locator('.service-detail')).toHaveCount(9);
-  await page.locator('#roof').getByRole('link', { name: 'Discuss This Service' }).click();
-  await expect(page.locator('#serviceId')).toHaveValue('roof');
+  await expect(page.locator('.service-detail')).toHaveCount(10);
+  await expect(page.locator('#external-wall .eyebrow')).toHaveText('10 / WATERPROOFING & REPAIR');
+  await page.locator('#external-wall').getByRole('link', { name: 'Discuss This Service' }).click();
+  await expect(page.locator('#serviceId')).toHaveValue('external-wall');
 });
 test('process has no autoplay and obeys its controls', async ({ page }) => {
   await page.goto('/work-process');
