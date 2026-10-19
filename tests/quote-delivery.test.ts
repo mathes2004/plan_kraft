@@ -4,12 +4,14 @@ import {
   quoteEmailFields,
   quoteInputFields,
   quoteDeliveryResult,
+  quoteRecipient,
 } from '@/lib/quote-delivery';
 import { quoteSchema } from '@/lib/validation/quote';
 
 describe('Forminit delivery contract', () => {
   test('keeps requests on the official endpoint and rejects missing or invalid IDs', () => {
     expect(forminitEndpoint('nilov0qnww9')).toBe('https://forminit.com/f/nilov0qnww9');
+    expect(quoteRecipient).toBe('Plankraftwaterproofing@gmail.com');
     for (const id of [
       '',
       ' ',

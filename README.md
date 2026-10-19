@@ -32,13 +32,13 @@ The active form uses the documented [Forminit submission endpoint](https://formi
 
 ### Gmail notification workflow
 
-The recipient is **vinothvj1993@gmail.com**. Forminit routes notifications through its dashboard workflow; the website cannot choose or verify that recipient by adding a field to the submission. Changing the recipient requires updating the workflow's To field and publishing it; changing this project reference alone cannot redirect delivery.
+The website's expected notification recipient is **Plankraftwaterproofing@gmail.com**, shared by the public contact details and the optional server endpoint through `src/data/quote-config.ts`. Forminit routes notifications through its dashboard workflow; the website cannot choose or verify that recipient by adding a field to the submission. Changing the recipient requires updating the workflow's To field and publishing it; changing this project reference alone cannot redirect delivery.
 
 To configure or review it:
 
 1. Open form **nilov0qnww9** in the [Forminit dashboard](https://app.forminit.com/).
 2. In Form Settings, choose **Public** authentication.
-3. Under **Workflow**, connect **Submission received** directly to **Send email notification**. Set **To** to **vinothvj1993@gmail.com** and choose **Publish**.
+3. Under **Workflow**, connect **Submission received** directly to **Send email notification**. Set **To** to **Plankraftwaterproofing@gmail.com**, remove any previous recipients from To/Cc/Bcc, and choose **Publish**.
 4. Keep the default sender `notifications@forminit.com`; custom SMTP is unnecessary. A useful subject is `PLAN KRAFT enquiry {{@submission_id}}`. Use the default answers template, or include all answers in the email body. The form collects a phone number rather than a customer email, so do not use an absent `sender.email` as Reply-to.
 5. If Authorized Domains are enabled, add `mathes2004.github.io`. Add `localhost` and `127.0.0.1` only for local submissions. Enter hostnames without protocol, path or port; an unlisted referrer may be treated as spam and skip notification actions.
 6. Submit an enquiry from the deployed website, check its submission/workflow logs in Forminit and confirm actual Gmail receipt, including Spam. Submission acceptance does not establish mailbox delivery.

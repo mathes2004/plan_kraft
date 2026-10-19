@@ -1,3 +1,5 @@
+import { quoteConfig } from './quote-config';
+
 export const company = {
   name: 'PLAN KRAFT WATERPROOFING SOLUTIONS',
   address: 'Senkunthar Street, Arayampathy 02, Batticaloa, Sri Lanka',
@@ -6,7 +8,7 @@ export const company = {
   tel: 'tel:+94740388334',
   secondaryTel: 'tel:+94755183966',
   whatsapp: 'https://wa.me/94755183966',
-  email: 'vinothvj1993@gmail.com',
+  email: quoteConfig.recipient,
   experience: 10,
   projects: 335,
   coverage: 'Islandwide — all Sri Lanka',

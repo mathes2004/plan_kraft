@@ -2,7 +2,8 @@ import 'server-only';
 import { createHash } from 'node:crypto';
 import { quoteSchema } from '@/lib/validation/quote';
 import { services } from '@/data/services';
-const QUOTE_RECIPIENT = 'vinothvj1993@gmail.com';
+import { quoteConfig } from '@/data/quote-config';
+const QUOTE_RECIPIENT = quoteConfig.recipient;
 const LIMIT = 16 * 1024;
 function reply(
   status: number,
