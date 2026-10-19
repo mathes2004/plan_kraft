@@ -8,7 +8,8 @@ import {
   quoteDeliveryEndpoint,
   quoteDeliveryResult,
   quoteEmailFields,
-  quoteFormAction,
+  quoteFieldNames,
+  quoteInputFields,
 } from '@/lib/quote-delivery';
 
 export default function QuoteForm() {
@@ -28,8 +29,7 @@ export default function QuoteForm() {
     e.preventDefault();
     if (inFlight.current) return;
     setResult(null);
-    const formValues = Object.fromEntries(new FormData(e.currentTarget));
-    const data = { ...formValues, website: formValues._honey || '' };
+    const data = quoteInputFields(new FormData(e.currentTarget));
     const content = JSON.stringify(data);
     if (previous.current !== content || !submission.current) {
       submission.current = crypto.randomUUID();
@@ -44,18 +44,27 @@ export default function QuoteForm() {
       return;
     }
     setErrors({});
+    if (!quoteDeliveryEndpoint) {
+      setResult({
+        ok: false,
+        message:
+          'Online enquiries are temporarily unavailable. Please call or WhatsApp us for your quotation.',
+      });
+      requestAnimationFrame(() => summary.current?.focus());
+      return;
+    }
     setBusy(true);
     inFlight.current = true;
     try {
       const response = await fetch(quoteDeliveryEndpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(
+        headers: { Accept: 'application/json' },
+        body: new URLSearchParams(
           quoteEmailFields(parsed.data, window.location.origin + window.location.pathname),
         ),
         signal: AbortSignal.timeout(20000),
       });
-      const delivery = quoteDeliveryResult(response.ok, await response.json());
+      const delivery = quoteDeliveryResult(response.status, await response.json());
       setResult(delivery);
       if (delivery.ok) {
         form.current?.reset();
@@ -74,14 +83,14 @@ export default function QuoteForm() {
       requestAnimationFrame(() => summary.current?.focus());
     }
   }
-  const field = (id: string, label: string, type = 'text', max = 200) => (
+  const field = (id: 'name' | 'phone' | 'location', label: string, type = 'text', max = 200) => (
     <div className="field">
       <label htmlFor={id}>
         {label} <span aria-hidden="true">*</span>
       </label>
       <input
         id={id}
-        name={id}
+        name={quoteFieldNames[id]}
         type={type}
         required
         maxLength={max}
@@ -100,15 +109,19 @@ export default function QuoteForm() {
     <form
       ref={form}
       className="quote-form"
-      action={quoteFormAction}
+      action={quoteDeliveryEndpoint || undefined}
       method="POST"
       onSubmit={submit}
       noValidate
       aria-busy={busy}
     >
-      <input type="hidden" name="_subject" value="PLAN KRAFT - New quotation enquiry" />
-      <input type="hidden" name="_template" value="table" />
       <p className="small">All fields marked * are required.</p>
+      {!quoteDeliveryEndpoint && (
+        <p role="status" className="form-message">
+          Online enquiries are temporarily unavailable. Please call or WhatsApp us for your
+          quotation.
+        </p>
+      )}
       {(Object.keys(errors).length > 0 || result) && (
         <div
           className={`form-message ${result?.ok ? 'success' : ''}`}
@@ -137,7 +150,7 @@ export default function QuoteForm() {
         <label htmlFor="serviceId">Required service *</label>
         <select
           id="serviceId"
-          name="serviceId"
+          name={quoteFieldNames.serviceId}
           required
           defaultValue={initial}
           aria-invalid={!!errors.serviceId}
@@ -160,7 +173,7 @@ export default function QuoteForm() {
         <label htmlFor="description">Tell us about your project / leakage problem *</label>
         <textarea
           id="description"
-          name="description"
+          name={quoteFieldNames.description}
           rows={6}
           minLength={10}
           maxLength={5000}
@@ -179,10 +192,10 @@ export default function QuoteForm() {
       </div>
       <div className="honeypot" aria-hidden="true">
         <label htmlFor="website">Leave this field empty</label>
-        <input id="website" name="_honey" tabIndex={-1} autoComplete="off" />
+        <input id="website" name="_gotcha" type="hidden" autoComplete="off" />
       </div>
       <p className="small">Your details are used to respond to this enquiry.</p>
-      <button className="button" type="submit" disabled={busy}>
+      <button className="button" type="submit" disabled={busy || !quoteDeliveryEndpoint}>
         {busy ? 'Sending enquiry…' : 'Send Enquiry'} <span>↗</span>
       </button>
       <p className="small">

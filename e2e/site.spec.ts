@@ -54,7 +54,7 @@ test('quote validation and honest delivery failure feedback', async ({ page }) =
   await page.locator('#location').fill('Batticaloa');
   await page.locator('#serviceId').selectOption('roof');
   await page.locator('#description').fill('Water is leaking through the roof.');
-  await page.route('https://formsubmit.co/ajax/mathesmathes20005@gmail.com', (r) =>
+  await page.route('https://forminit.com/f/nilov0qnww9', (r) =>
     r.fulfill({
       status: 503,
       contentType: 'application/json',

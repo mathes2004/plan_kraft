@@ -1,41 +1,81 @@
 import { services } from '@/data/services';
+import { quoteConfig } from '@/data/quote-config';
 import type { z } from 'zod';
 import type { quoteSchema } from '@/lib/validation/quote';
 
-export const quoteRecipient = 'mathesmathes20005@gmail.com';
-export const quoteFormAction = `https://formsubmit.co/${quoteRecipient}`;
-export const quoteDeliveryEndpoint = `https://formsubmit.co/ajax/${quoteRecipient}`;
+export const quoteRecipient = quoteConfig.recipient;
+export function forminitEndpoint(formId: string) {
+  const id = formId.trim();
+  return /^[a-zA-Z0-9_-]+$/.test(id) && id.length <= 128 ? `https://forminit.com/f/${id}` : null;
+}
+export const quoteDeliveryEndpoint = forminitEndpoint(
+  process.env.NEXT_PUBLIC_FORMINIT_FORM_ID || quoteConfig.formId,
+);
 
-export function quoteEmailFields(data: z.output<typeof quoteSchema>, sourceUrl: string) {
+export const quoteFieldNames = {
+  name: 'fi-sender-fullName',
+  phone: 'fi-sender-phone',
+  location: 'fi-text-location',
+  serviceId: 'fi-text-service',
+  description: 'fi-text-message',
+} as const;
+
+export function quoteInputFields(form: FormData) {
   return {
-    name: data.name,
-    phone: data.phone,
-    location: data.location,
-    service: services.find((service) => service.id === data.serviceId)!.title,
-    message: data.description,
-    reference: data.submissionId,
-    _subject: 'PLAN KRAFT — New quotation enquiry',
-    _template: 'table',
-    _honey: data.website || '',
-    _url: sourceUrl,
+    ...Object.fromEntries(
+      Object.entries(quoteFieldNames).map(([key, name]) => [key, form.get(name)]),
+    ),
+    website: form.get('_gotcha') || '',
   };
 }
 
-export function quoteDeliveryResult(responseOk: boolean, body: unknown) {
+export function quoteEmailFields(data: z.output<typeof quoteSchema>, sourceUrl: string) {
+  return {
+    'fi-sender-fullName': data.name,
+    'fi-sender-phone': data.phone,
+    'fi-text-location': data.location,
+    'fi-text-service': services.find((service) => service.id === data.serviceId)!.title,
+    'fi-text-message': data.description,
+    'fi-text-reference': data.submissionId,
+    'fi-url-source': sourceUrl,
+    _gotcha: data.website || '',
+  };
+}
+
+export function quoteDeliveryResult(status: number, body: unknown) {
   const data = body && typeof body === 'object' ? (body as Record<string, unknown>) : {};
-  const activationPending =
-    typeof data.message === 'string' && /activat|confirm.*(?:email|form)/i.test(data.message);
-  if (activationPending)
+  if (status === 429 || data.error === 'TOO_MANY_REQUESTS')
     return {
       ok: false,
       message:
-        'Online enquiries are awaiting email activation. Please call or WhatsApp us for your quotation.',
+        'Please wait at least five seconds before trying again. Your details have been kept.',
     };
-  if (responseOk && (data.success === true || data.success === 'true'))
+  const submission =
+    data.submission && typeof data.submission === 'object'
+      ? (data.submission as Record<string, unknown>)
+      : {};
+  if (
+    status >= 200 &&
+    status < 300 &&
+    data.success === true &&
+    !data.error &&
+    typeof submission.hashId === 'string' &&
+    submission.hashId.trim()
+  )
     return {
       ok: true,
       message:
         'Your enquiry has been accepted. We’ll contact you using the details provided. For urgent help, please call or WhatsApp us.',
+    };
+  if (
+    ['MISSING_API_KEY', 'FORM_NOT_FOUND', 'FORM_DISABLED', 'LIMIT_EXPIRED'].includes(
+      String(data.error),
+    )
+  )
+    return {
+      ok: false,
+      message:
+        'Online enquiries are temporarily unavailable. Your details have been kept; please call or WhatsApp us for your quotation.',
     };
   return {
     ok: false,

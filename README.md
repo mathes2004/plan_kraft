@@ -12,7 +12,7 @@ Copy-Item .env.example .env.local
 npm.cmd run dev
 ```
 
-Open http://localhost:3000. The email form needs no API keys. Do not overwrite an existing `.env.local` containing your own settings. On systems that allow npm's PowerShell script, `npm` also works.
+Open http://localhost:3000. The active Forminit form needs no API keys. Do not overwrite an existing `.env.local` containing your own settings. On systems that allow npm's PowerShell script, `npm` also works.
 
 ```powershell
 npm.cmd run lint
@@ -24,27 +24,38 @@ npm.cmd run test:e2e -- --workers=2
 
 Browser tests use installed Microsoft Edge on Windows. Adjust the Playwright channel for another system. Build before testing against the production server; Playwright can also reuse an existing local server.
 
-## Free quote emails
+## Forminit quote emails
 
-The form sends directly to [FormSubmit](https://formsubmit.co/) using its [AJAX endpoint](https://formsubmit.co/ajax-documentation). FormSubmit advertises a free service with no registration required. No paid subscription, Resend account, Redis database, private API key or application server is required for this form. It works with GitHub Pages.
+The active form uses the documented [Forminit submission endpoint](https://forminit.com/docs/submit-form-api/) in Public mode. Form ID: **nilov0qnww9**. The public ID and expected notification recipient are recorded in `src/data/quote-config.ts`. The optional `NEXT_PUBLIC_FORMINIT_FORM_ID` environment variable overrides the public ID; GitHub Pages can obtain this from the repository variable `FORMINIT_FORM_ID`. No private API key, SDK, application server, Redis database or paid subscription is needed for this integration.
 
-Recipient: **mathesmathes20005@gmail.com**. The endpoint and readable email field mapping are centralized in `src/lib/quote-delivery.ts`; the form is in `src/components/QuoteForm.tsx`.
+[Forminit's Free plan](https://forminit.com/pricing/) includes one form, email notifications and **100 submissions per month**. Public forms accept at most one request per five seconds per IP address. When the monthly allowance is exhausted, Forminit pauses new submissions; the website keeps entered details and offers phone/WhatsApp contact.
 
-### Required one-time activation
+### Gmail notification workflow
 
-1. Deploy the updated website and submit a test enquiry from its quote form.
-2. Open **mathesmathes20005@gmail.com**, check Inbox and Spam, and open FormSubmit's confirmation email.
-3. Click the activation link. Then submit another test enquiry and confirm the actual enquiry email arrives with name, phone number, location, selected service and project description.
+The recipient is **mathesmathes20005@gmail.com**. Forminit routes notifications through its dashboard workflow; the website cannot choose or verify that recipient by adding a field to the submission. The owner confirmed Public authentication and the published Gmail notification workflow during setup.
 
-Until activation, submissions may await confirmation. See [FormSubmit help](https://formsubmit.co/help). This workspace has not triggered an activation email or confirmed live mailbox receipt. Activation belongs to the recipient and cannot be completed by changing website code.
+To configure or review it:
 
-The client validates required fields, normalizes Sri Lankan mobile numbers, includes a hidden honeypot and prevents concurrent submissions. It sends a readable service name and a tracking reference. A reference is not a provider idempotency guarantee: retries after an uncertain response can create duplicate emails. Provider acceptance is not proof of inbox delivery. Failed, malformed or activation-pending responses preserve entered details; WhatsApp remains available. Automated tests mock the provider and send no emails.
+1. Open form **nilov0qnww9** in the [Forminit dashboard](https://app.forminit.com/).
+2. In Form Settings, choose **Public** authentication.
+3. Under **Workflow**, connect **Submission received** directly to **Send email notification**. Set **To** to **mathesmathes20005@gmail.com** and choose **Publish**.
+4. Keep the default sender `notifications@forminit.com`; custom SMTP is unnecessary. A useful subject is `PLAN KRAFT enquiry {{@submission_id}}`. Use the default answers template, or include all answers in the email body. The form collects a phone number rather than a customer email, so do not use an absent `sender.email` as Reply-to.
+5. If Authorized Domains are enabled, add `mathes2004.github.io`. Add `localhost` and `127.0.0.1` only for local submissions. Enter hostnames without protocol, path or port; an unlisted referrer may be treated as spam and skip notification actions.
+6. Submit an enquiry from the deployed website, check its submission/workflow logs in Forminit and confirm actual Gmail receipt, including Spam. Submission acceptance does not establish mailbox delivery.
 
-FormSubmit processes submitted details for email delivery; its [documentation](https://formsubmit.co/documentation) describes submission archives retained for 30 days. See its [privacy policy](https://formsubmit.co/privacy.pdf). The recipient is public in the website code. FormSubmit can supply an alternative endpoint token after confirmation if you later want to replace it.
+See [email notifications](https://forminit.com/docs/email-notifications/), [workflows](https://forminit.com/docs/workflow/) and [authorized domains](https://forminit.com/docs/authorized-domains/). If a submission is classified as spam, restoring it to Inbox does not automatically run the workflow; use the dashboard's Run workflow action where appropriate.
+
+### Request and response behavior
+
+`src/lib/quote-delivery.ts` maps the existing fields to documented Forminit names: `fi-sender-fullName`, `fi-sender-phone`, `fi-text-location`, `fi-text-service`, `fi-text-message`, `fi-text-reference` and `fi-url-source`. The hidden honeypot is `_gotcha`. Browser fetch submits URL-encoded fields to `https://forminit.com/f/nilov0qnww9` with `Accept: application/json`; Forminit explicitly supports this content type. Private keys are never sent from the client.
+
+The client validates fields, normalizes Sri Lankan mobile numbers and prevents simultaneous submissions. It shows acceptance only for a successful HTTP response containing `success: true` and a submission ID. Rate limits, disabled/missing forms, exhausted quotas, malformed responses and network failures preserve entered details. The visitor stays on the website after acceptance; remote redirect URLs are not followed. Tracking references do not guarantee deduplication after uncertain responses. No enquiry contents are logged by this application.
+
+Forminit stores submissions in its dashboard. Its default retention and available controls are described in the [retention documentation](https://forminit.com/docs/submission-retention/). Review the service settings when managing customer enquiries.
 
 ### Optional legacy server endpoint
 
-`/api/quote` and `src/lib/server/quote.ts` remain available only in a normal Next.js server build. The current form does **not** call them. Their Resend/Redis/Turnstile environment settings in `.env.example` are optional legacy configuration, unrelated to the free form. The Pages build excludes this server code. If intentionally switching back to that endpoint, configure a verified sender, shared rate limiter and trusted hosting IP adapter, then validate real receipt again. Never commit real credentials.
+`/api/quote` and `src/lib/server/quote.ts` remain available only in a normal Next.js server build. The current form does not call them. Their Resend/Redis/Turnstile environment settings in `.env.example` are optional legacy configuration, unrelated to Forminit. The Pages build excludes this server code. Never commit credentials.
 
 ## GitHub Pages preview
 
@@ -109,6 +120,6 @@ The homepage uses the selected reference site's Three.js house animation inside 
 
 ## Handover
 
-After deployment, check direct-route reloads, mobile navigation, telephone/WhatsApp links, photo galleries, comparison controls and actual quote email receipt. Record live activation and receipt in `QA.md`. Local mocked tests do not establish real delivery. Physical devices, Safari/Firefox, full accessibility review and performance measurement remain separate acceptance work.
+After deployment, check direct-route reloads, mobile navigation, telephone/WhatsApp links, photo galleries, comparison controls and actual quote email receipt. Record confirmed live receipt in `QA.md`. Local mocked tests do not establish real delivery. Physical devices, Safari/Firefox, full accessibility review and performance measurement remain separate acceptance work.
 
 Retain the last known-good deployment and source commit for rollback. Review dependency updates deliberately and rerun relevant checks. The older Vite files are retained but are not used by Next.js.

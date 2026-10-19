@@ -75,10 +75,10 @@ test('static quote form sends through the free service without a local API', asy
     if (request.url().includes('/api/quote')) requests.push(request.url());
   });
   await page.goto('request-quote/?service=roof&project=Rooftop%20waterproofing');
-  await page.route('https://formsubmit.co/ajax/mathesmathes20005@gmail.com', (route) =>
+  await page.route('https://forminit.com/f/nilov0qnww9', (route) =>
     route.fulfill({
       contentType: 'application/json',
-      body: JSON.stringify({ success: 'true', message: 'Form submitted successfully' }),
+      body: JSON.stringify({ success: true, submission: { hashId: 'preview-submission-01' } }),
     }),
   );
   await expect(page.locator('#serviceId')).toHaveValue('roof');

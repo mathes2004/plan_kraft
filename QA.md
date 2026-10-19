@@ -3,22 +3,22 @@
 Date: 19 October 2026 · Environment: local Windows / Node.js 24.22.0 / Next.js 16.4.2 / installed Microsoft Edge via Playwright.
 Status: tested local implementation preview; production inputs and live acceptance remain pending.
 
-## Free email form and Pages update
+## Forminit migration
 
-The active quote form now posts directly to FormSubmit for **mathesmathes20005@gmail.com**. It requires no paid subscription, Resend key, Redis database or server endpoint. The legacy server API remains separately tested but is not called by the form and is omitted from the static export.
+The former FormSubmit integration has been removed from the active form. Quote submissions now use Public-mode Forminit form **nilov0qnww9**. The owner confirmed Public authentication and a published Send email notification workflow addressed to **mathesmathes20005@gmail.com**. No private Forminit API key is exposed or required.
 
-- Normal production build and GitHub Pages static build passed.
-- All 34 existing unit/legacy API tests passed.
-- Ten focused desktop/mobile form tests passed: full field mapping and fixed recipient, required fields and honeypot, concurrent-submit guard, service rejection, HTTP errors, malformed responses, activation-pending feedback, network failure and retry. All external form responses were mocked.
-- Eight desktop/mobile static export tests passed: all seven repository-prefixed routes, navigation and reloads, local gallery photos, local WebGL banner, enabled quote form with mocked delivery, sitemap/robots and 404 handling. Missing segment-payload paths from the installed Next.js export are materialized as aliases by the Pages build script.
-- No live email, activation request or confirmed mailbox receipt was performed. An additional external documentation check was not executed because automatic approval review could not complete due to a session usage limit. Local tests continued without bypassing the review.
-- Required live acceptance: deploy this version, submit a test, activate FormSubmit through the recipient's confirmation email (including Spam), then submit again and record actual receipt here. Provider acceptance alone is not proof of mailbox delivery.
-- GitHub Pages is published at https://mathes2004.github.io/plan_kraft/. The first automatic push (`d903331`) matched local and remote main. Windows task `PlanKraft-GitHub-AutoSync` is running as the current user with limited privileges and restarts at sign-in. Local Git uses the existing owner sign-in, separately from the read-only GitHub connector.
-- Deployment workflow run `39230437111`, attempt 2, succeeded after enabling Pages with GitHub Actions. A headless Edge check loaded all seven published routes with one heading/footer each, an enabled quote form with the correct recipient endpoint, and no failed site resource responses or browser runtime errors. No form submissions were sent.
+- The complete documentation index was retrieved (50 guide/reference pages), with implementation based on the submission API, block naming, Next.js/React, SDK, honeypot, notifications, workflows, redirections, authorized domains and retention guidance. This static site uses the documented URL-encoded REST interface directly.
+- Both normal Next.js and GitHub Pages production builds passed. All seven primary routes remain available.
+- Four new unit tests passed for field mapping, normalized sender phone, endpoint configuration, honeypot validation, strict submission acknowledgement and provider error handling.
+- Twenty desktop/mobile browser tests passed: ten focused quote tests, eight static-export checks and two broader quote-feedback checks. The two test-owned web servers needed explicit shutdown after assertions completed; all commands then exited successfully. Browser mocks use Forminit's actual response structure. HTTPS requests are blocked by default in the focused form tests unless explicitly handled by a test mock.
+- The previous browser run initially used an older production build; it was stopped, the normal build was refreshed and tests were rerun against the new integration.
+- The form keeps entered details on network failures, malformed or rejected responses, rate limits and unavailable forms. A success response must contain a submission ID. Redirect URLs from the response are not followed.
+- Free plan: one form, 100 submissions/month, email notifications. Public endpoint limit: one request per five seconds per IP. Notification delivery and the recipient are controlled by Forminit's published workflow.
+- Actual Gmail receipt remains unverified. Provider acceptance and mocked tests do not establish mailbox delivery. Check Forminit workflow results and Gmail Inbox/Spam after a real submission.
 
 ## Previous broader acceptance record
 
-The following records describe earlier checks. Server protection, HTML escaping and provider idempotency rows apply only to the retained legacy API, not the active FormSubmit delivery path. The active client prevents simultaneous sends but does not guarantee deduplication after uncertain responses.
+The following records describe earlier checks. Server protection, HTML escaping and provider idempotency rows apply only to the retained legacy API, not the active Forminit delivery path. The active client prevents simultaneous sends but does not guarantee deduplication after uncertain responses.
 
 | Check                                | Result                                                                                                                                   |
 | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -46,7 +46,7 @@ The following records describe earlier checks. Server protection, HTML escaping 
 | Map                                  | Address-search embed and external fallback provided; precise entrance pin pending                                                        |
 | 200% zoom / full keyboard / contrast | Comprehensive manual verification pending; no accessibility compliance claim                                                             |
 | Physical devices / Safari / Firefox  | Not tested; mobile browser profile is emulation                                                                                          |
-| Live email receipt                   | Not tested; deploy the FormSubmit form, activate the recipient and confirm mailbox receipt                                               |
+| Live email receipt                   | Not tested; submit through Forminit and confirm mailbox receipt                                                                          |
 | Performance / Core Web Vitals        | Not measured                                                                                                                             |
 | Domain / HTTPS / rollback            | Not configured or tested                                                                                                                 |
 
@@ -56,7 +56,7 @@ Screenshots are generated by the responsive test under `test-results/previews/`.
 
 Production-only `npm audit --omit=dev` returned zero vulnerabilities. Full audit reported five high-severity development-tool findings through the Next.js ESLint plugin → fast-glob → micromatch → braces chain. The [braces advisory](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm) lists no patched version. Do not run the suggested forced downgrade of the current Next lint configuration without compatibility review. The application does not use visitor input in lint glob patterns. Review this advisory when updating tooling; ESLint 9 also reports a deprecation warning, while the installed React lint plugin declares ESLint 9 peer compatibility.
 
-Production handover requires deployment, FormSubmit recipient activation and confirmed mailbox receipt. Supplied project photographs are already integrated. A mocked test or provider acceptance response does not establish actual email delivery. Record the real receipt date, environment and outcome here without customer information.
+Production handover requires deployment, the published Forminit notification workflow and confirmed mailbox receipt. Supplied project photographs are already integrated. A mocked test or provider acceptance response does not establish actual email delivery. Record the real receipt date, environment and outcome here without customer information.
 
 ## Automatic GitHub sync checks
 

@@ -1,6 +1,18 @@
 import { test, expect, type Page } from '@playwright/test';
 
-const endpoint = 'https://formsubmit.co/ajax/mathesmathes20005@gmail.com';
+const endpoint = 'https://forminit.com/f/nilov0qnww9';
+const accepted = {
+  success: true,
+  submission: { hashId: 'test-submission-01' },
+  redirectUrl: 'https://forminit.com/thank-you',
+};
+test.beforeEach(async ({ page }) => {
+  // Only per-test provider mocks may handle external requests.
+  await page.route(
+    (url) => url.protocol === 'https:',
+    (route) => route.abort(),
+  );
+});
 async function fillEnquiry(page: Page) {
   await page.locator('#name').fill('Test Customer');
   await page.locator('#phone').fill('077 123 4567');
@@ -29,7 +41,7 @@ test('invalid fields and honeypot values never reach the mail service', async ({
   expect(sent).toBe(0);
 });
 
-test('Send delivers every field to the fixed recipient and prevents concurrent requests', async ({
+test('Send delivers every field to the configured Forminit form and prevents concurrent requests', async ({
   page,
 }) => {
   const payloads: Record<string, unknown>[] = [];
@@ -38,18 +50,19 @@ test('Send delivers every field to the fixed recipient and prevents concurrent r
     release = resolve;
   });
   await page.route(endpoint, async (route) => {
-    payloads.push(route.request().postDataJSON());
+    expect(route.request().headers()['x-api-key']).toBeUndefined();
+    expect(route.request().headers()['content-type']).toContain(
+      'application/x-www-form-urlencoded',
+    );
+    payloads.push(Object.fromEntries(new URLSearchParams(route.request().postData() || '')));
     await ready;
     await route.fulfill({
       contentType: 'application/json',
-      body: JSON.stringify({ success: 'true' }),
+      body: JSON.stringify(accepted),
     });
   });
   await page.goto('/request-quote');
-  await expect(page.locator('form')).toHaveAttribute(
-    'action',
-    'https://formsubmit.co/mathesmathes20005@gmail.com',
-  );
+  await expect(page.locator('form')).toHaveAttribute('action', endpoint);
   await fillEnquiry(page);
   const button = page.getByRole('button', { name: 'Send Enquiry' });
   await button.click();
@@ -62,18 +75,17 @@ test('Send delivers every field to the fixed recipient and prevents concurrent r
     );
   expect(payloads).toHaveLength(1);
   expect(payloads[0]).toMatchObject({
-    name: 'Test Customer',
-    phone: '+94771234567',
-    location: 'Batticaloa',
-    service: 'Roof / Rooftop Waterproofing',
-    message: 'Water is entering through the roof.',
-    _template: 'table',
-    _honey: '',
-    _url: 'http://localhost:3000/request-quote',
+    'fi-sender-fullName': 'Test Customer',
+    'fi-sender-phone': '+94771234567',
+    'fi-text-location': 'Batticaloa',
+    'fi-text-service': 'Roof / Rooftop Waterproofing',
+    'fi-text-message': 'Water is entering through the roof.',
+    _gotcha: '',
+    'fi-url-source': 'http://localhost:3000/request-quote',
   });
-  expect(payloads[0]).toHaveProperty('reference');
-  expect(payloads[0]).not.toHaveProperty('_captcha');
-  expect(payloads[0]).not.toHaveProperty('_cc');
+  expect(payloads[0]).toHaveProperty('fi-text-reference');
+  expect(payloads[0]).not.toHaveProperty('recipient');
+  expect(payloads[0]).not.toHaveProperty('fi-sender-email');
   release();
   await expect(page.getByRole('status')).toContainText('accepted');
   await expect(page.getByRole('status')).toBeFocused();
@@ -87,8 +99,9 @@ test('HTTP errors, provider rejection and malformed responses preserve entered d
   await page.goto('/request-quote');
   await fillEnquiry(page);
   for (const response of [
-    { status: 503, contentType: 'application/json', body: JSON.stringify({ success: 'true' }) },
-    { status: 200, contentType: 'application/json', body: JSON.stringify({ success: 'false' }) },
+    { status: 503, contentType: 'application/json', body: JSON.stringify(accepted) },
+    { status: 200, contentType: 'application/json', body: JSON.stringify({ success: false }) },
+    { status: 200, contentType: 'application/json', body: JSON.stringify({ success: true }) },
     { status: 200, contentType: 'text/html', body: '<html>Service unavailable</html>' },
   ]) {
     await page.route(endpoint, (route) => route.fulfill(response));
@@ -101,22 +114,22 @@ test('HTTP errors, provider rejection and malformed responses preserve entered d
   }
 });
 
-test('pending recipient activation is reported without pretending delivery succeeded', async ({
-  page,
-}) => {
+test('Forminit rate limits are reported without clearing the enquiry', async ({ page }) => {
   await page.route(endpoint, (route) =>
     route.fulfill({
+      status: 429,
       contentType: 'application/json',
       body: JSON.stringify({
-        success: 'true',
-        message: 'Please activate this form using the confirmation email.',
+        success: false,
+        error: 'TOO_MANY_REQUESTS',
+        code: 429,
       }),
     }),
   );
   await page.goto('/request-quote');
   await fillEnquiry(page);
   await page.getByRole('button', { name: 'Send Enquiry' }).click();
-  await expect(page.getByRole('status')).toContainText('awaiting email activation');
+  await expect(page.getByRole('status')).toContainText('wait at least five seconds');
   await expect(page.locator('#name')).toHaveValue('Test Customer');
   await expect(page.locator('.form-message')).not.toHaveClass(/success/);
 });
@@ -130,7 +143,7 @@ test('network errors keep the enquiry available for a successful retry', async (
   await expect(page.locator('#name')).toHaveValue('Test Customer');
   await page.unroute(endpoint);
   await page.route(endpoint, (route) =>
-    route.fulfill({ contentType: 'application/json', body: JSON.stringify({ success: true }) }),
+    route.fulfill({ contentType: 'application/json', body: JSON.stringify(accepted) }),
   );
   await page.getByRole('button', { name: 'Send Enquiry' }).click();
   await expect(page.getByRole('status')).toContainText('accepted');
