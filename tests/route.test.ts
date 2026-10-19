@@ -21,7 +21,7 @@ beforeEach(() => {
   vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'http://localhost:3000');
   vi.stubEnv('RESEND_API_KEY', 'test-key');
   vi.stubEnv('QUOTE_FROM_EMAIL', 'Plan Kraft <quote@example.com>');
-  vi.stubEnv('QUOTE_TO_EMAIL', 'mathesmathes20005@gmail.com');
+  vi.stubEnv('QUOTE_TO_EMAIL', 'vinothvj1993@gmail.com');
   vi.stubEnv('RATE_LIMIT_REST_URL', 'https://redis.example.com');
   vi.stubEnv('RATE_LIMIT_REST_TOKEN', 'test-token');
   vi.stubEnv('VERCEL', '1');
@@ -151,7 +151,7 @@ describe('quote endpoint', () => {
     expect(new Headers(sends[0].headers).get('Idempotency-Key')).toBe(
       new Headers(sends[1].headers).get('Idempotency-Key'),
     );
-    expect(JSON.parse(String(sends[0].body)).to).toEqual(['mathesmathes20005@gmail.com']);
+    expect(JSON.parse(String(sends[0].body)).to).toEqual(['vinothvj1993@gmail.com']);
   });
   it('does not let form fields redirect delivery when the recipient environment setting is absent', async () => {
     vi.stubEnv('QUOTE_TO_EMAIL', '');
@@ -177,6 +177,6 @@ describe('quote endpoint', () => {
     );
     expect(response.status).toBe(200);
     expect(sends).toHaveLength(1);
-    expect(JSON.parse(String(sends[0].body)).to).toEqual(['mathesmathes20005@gmail.com']);
+    expect(JSON.parse(String(sends[0].body)).to).toEqual(['vinothvj1993@gmail.com']);
   });
 });

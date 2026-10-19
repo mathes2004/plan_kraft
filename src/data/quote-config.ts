@@ -2,5 +2,5 @@
 export const quoteConfig = {
   formId: 'nilov0qnww9',
   // The matching recipient is configured in Forminit's published email workflow.
-  recipient: 'mathesmathes20005@gmail.com',
+  recipient: 'vinothvj1993@gmail.com',
 };

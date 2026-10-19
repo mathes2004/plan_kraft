@@ -2,7 +2,7 @@ import 'server-only';
 import { createHash } from 'node:crypto';
 import { quoteSchema } from '@/lib/validation/quote';
 import { services } from '@/data/services';
-const QUOTE_RECIPIENT = 'mathesmathes20005@gmail.com';
+const QUOTE_RECIPIENT = 'vinothvj1993@gmail.com';
 const LIMIT = 16 * 1024;
 function reply(
   status: number,
