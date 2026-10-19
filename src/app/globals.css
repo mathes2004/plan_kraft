@@ -1177,6 +1177,14 @@ button:enabled:active {
   height: 390px;
   border-radius: 12px;
 }
+.service-detail .service-graphic.service-photo-contained {
+  height: auto;
+  aspect-ratio: var(--service-image-ratio);
+  container-type: normal;
+}
+.service-detail .service-photo-contained .service-image-frame {
+  width: 100%;
+}
 .service-detail:nth-child(even) .service-graphic {
   order: 2;
 }
