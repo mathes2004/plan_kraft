@@ -1,6 +1,6 @@
 ﻿# PLAN KRAFT — Waterproofing Solutions
 
-Seven-page business website built with Next.js App Router, TypeScript and React. Includes ten services, twelve completed projects with local photo galleries, a real-photo comparison slider, an interactive homepage house animation, an eight-stage work process and a quote form.
+Seven-page business website built with Next.js App Router, TypeScript and React. Includes sixteen services, twelve completed projects with local photo galleries, a real-photo comparison slider, an interactive homepage house animation, an eight-stage work process and a quote form.
 
 ## Run locally
 
@@ -108,7 +108,7 @@ Implementation references: [Git status](https://git-scm.com/docs/git-status), [G
 Routes: `/`, `/services`, `/about`, `/projects`, `/work-process`, `/contact`, `/request-quote`.
 
 - Company facts and contact links: `src/data/company.ts`.
-- Ten services and shared image mappings: `src/data/services.ts`.
+- Sixteen services and shared image mappings, including the three explicit homepage previews: `src/data/services.ts`.
 - Completed projects and comparison pair: `src/data/projects.ts`.
 - Work process stages: `src/data/process.ts`.
 - Styling and responsive layouts: `src/app/globals.css`.

@@ -6,7 +6,7 @@
 | Browser tab icon | Original Plan Kraft JPEG above | Self-contained SVG wrapper embeds the original image bytes unchanged within a square viewport | `public/brand/plan-kraft-icon.svg`; base-path-aware icon metadata in the root layout |
 | Interactive homepage house | https://plan-kraft-roof-protection.socialrook16.chatgpt.site/ | User-requested reference banner; house scene and renderer copied locally, controls and layout adapted | Home banner in `public/banner/`; Three.js r169 and font licenses included beside local dependencies |
 | Rooftop architectural illustration | Repository-native SVG in `src/components/ui.tsx` | Illustration only | Fallback when no approved rooftop project photograph is available |
-| Service images 01-10 | Ten numbered local image files supplied by the user, listed below | User-requested replacements and new External Wall service photograph, copied without modifying their contents | `src/assets/services/`; shared static imports in `src/data/services.ts` for the Services page and homepage previews |
+| Service images 01-16 | Sixteen numbered local image files supplied by the user, listed below | User-requested service images and promotional artwork, copied without modifying their contents | `src/assets/services/`; shared static imports in `src/data/services.ts` for the Services page and homepage previews |
 | Genuine project photos | Thirty-two originals supplied by the user for twelve projects, listed below | Explicitly authorized for publication in the user's project-showcase requests | `src/assets/projects/<project-number>/`; twelve Projects page showcases; the original three featured records remain on the homepage; completed rooftop photograph also used on About |
 | Exterior BEFORE photograph | User-provided `832835973_1068602759141192_771004835693052204_n.jpg` | User-approved for homepage comparison; original 2048 x 1153 photo copied without modification | `src/assets/before-after/exterior-before.jpg` |
 | Exterior AFTER photograph | User-provided `830540272_1068600839141384_144411095039607790_n.jpg` | User-approved for homepage comparison; original 1672 x 941 photo copied without modification | `src/assets/before-after/exterior-after.jpg` |
@@ -30,8 +30,16 @@ For each photo added, record original filename/source, written business approval
 | 08 | Wall Leakage / Dampness Treatment | Wall Leakage.jpg | wall-leakage.jpg | 1280 x 576 |
 | 09 | Commercial / Industrial Waterproofing | Industrial Waterproofing.jfif | industrial-waterproofing.jpg | 516 x 387 |
 | 10 | External Wall Waterproofing | Exernal Wall Waterproofing.jpg | external-wall-waterproofing.jpg | 1600 x 1204 |
+| 11 | Epoxy Grouting | Epoxy Grouting.jfif | epoxy-grouting.jpg | 1086 x 1448 |
+| 12 | Fiber Paint Application | Faiber paint application.jfif | fiber-paint-application.jpg | 1600 x 1200 |
+| 13 | Polyurethane Coating Application | Polyurethane coating application.jfif | polyurethane-coating-application.jpg | 576 x 1280 |
+| 14 | Sand Epoxy Flooring | Sand Epoxy Flooring.jpeg | sand-epoxy-flooring.jpg | 1024 x 1536 |
+| 15 | Rooftop Heat Proofing | Rooftop Heat Proofing.jpeg | rooftop-heat-proofing.jpg | 1312 x 1199 |
+| 16 | Roof Waterproofing | Roof Waterproofing.jpeg | roof-waterproofing.jpg | 1312 x 1199 |
 
-Sources are in `C:\Users\ASUS\Pictures`. All ten originals were copied byte-for-byte into both the active project's `src/assets/services/` directory and the user-requested `C:\Users\ASUS\Documents\GitHub\plan_kraft\src\assets\services` directory; SHA-256 hashes were checked against the originals. The supplied JFIF files contain JPEG data and use `.jpg` destination filenames without re-encoding. The homepage's three previews share the Rooftop, Bathroom and Balcony images from services 01-03. Service 10 adds External Wall Waterproofing and is available in the enquiry form. Older unused service assets remain unreferenced. These service photographs are not automatically presented as completed portfolio projects.
+Sources are in `C:\Users\ASUS\Pictures`. All sixteen originals were copied byte-for-byte into both the active project's `src/assets/services/` directory and the user-requested `C:\Users\ASUS\Documents\GitHub\plan_kraft\src\assets\services` directory; SHA-256 hashes were checked against the originals. The supplied JFIF and JPEG files use `.jpg` destination filenames without re-encoding. The homepage's three previews share images and links with Epoxy Grouting, Fiber Paint Application and Polyurethane Coating Application (services 11-13), selected explicitly through `homepageServices`. The original services 01-10 remain unchanged. All sixteen services are available in the enquiry form.
+
+Services 11 and 14 use supplied promotional posters; their image frames use a 1.4 scale to keep outdated contact banners out of view without altering the original files or the card layout. Services 15 and 16 were supplied as separate files containing identical heat-proofing artwork; each is used for its assigned service. Promotional graphics and illustrations are not presented as genuine completed-project photographs. Older unused service assets remain unreferenced.
 
 ## Completed project photographs
 

@@ -25,13 +25,24 @@ test('home has the required sections and no process model', async ({ page }) => 
   await expect(page.locator('main>section')).toHaveCount(7);
   await expect(page.locator('footer')).toHaveCount(1);
   await expect(page.locator('.process-scene')).toHaveCount(0);
+  await expect(page.locator('.service-preview .preview-body h3')).toHaveText([
+    'Epoxy Grouting↗',
+    'Fiber Paint Application↗',
+    'Polyurethane Coating Application↗',
+  ]);
 });
-test('all ten services have quote links', async ({ page }) => {
+test('all sixteen services have quote links', async ({ page }) => {
   await page.goto('/services');
-  await expect(page.locator('.service-detail')).toHaveCount(10);
+  await expect(page.locator('.service-detail')).toHaveCount(16);
   await expect(page.locator('#external-wall .eyebrow')).toHaveText('10 / WATERPROOFING & REPAIR');
-  await page.locator('#external-wall').getByRole('link', { name: 'Discuss This Service' }).click();
-  await expect(page.locator('#serviceId')).toHaveValue('external-wall');
+  await expect(page.locator('#roof-waterproofing .eyebrow')).toHaveText(
+    '16 / WATERPROOFING & REPAIR',
+  );
+  await page
+    .locator('#roof-waterproofing')
+    .getByRole('link', { name: 'Discuss This Service' })
+    .click();
+  await expect(page.locator('#serviceId')).toHaveValue('roof-waterproofing');
 });
 test('process has no autoplay and obeys its controls', async ({ page }) => {
   await page.goto('/work-process');

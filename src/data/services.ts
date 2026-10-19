@@ -8,6 +8,12 @@ import crackImage from '@/assets/services/concrete-crack-repair.jpg';
 import wallImage from '@/assets/services/wall-leakage.jpg';
 import industrialImage from '@/assets/services/industrial-waterproofing.jpg';
 import externalWallImage from '@/assets/services/external-wall-waterproofing.jpg';
+import epoxyGroutingImage from '@/assets/services/epoxy-grouting.jpg';
+import fiberPaintImage from '@/assets/services/fiber-paint-application.jpg';
+import polyurethaneImage from '@/assets/services/polyurethane-coating-application.jpg';
+import sandEpoxyImage from '@/assets/services/sand-epoxy-flooring.jpg';
+import heatProofingImage from '@/assets/services/rooftop-heat-proofing.jpg';
+import roofWaterproofingImage from '@/assets/services/roof-waterproofing.jpg';
 
 export const services = [
   {
@@ -150,5 +156,102 @@ export const services = [
     process:
       'Prepare the wall, repair surface defects, detail vulnerable junctions and apply the selected protective system.',
   },
+  {
+    id: 'epoxy-grouting',
+    title: 'Epoxy Grouting',
+    short: 'Epoxy Grouting',
+    image: {
+      src: epoxyGroutingImage,
+      alt: 'Plan Kraft epoxy grouting service graphic showing tile-joint preparation and finishing',
+      scale: 1.4,
+    },
+    problem: 'Worn, stained or missing grout in tiled surfaces and wet areas.',
+    solution:
+      'Inspect the tile joints and existing finish before selecting a compatible epoxy grout treatment.',
+    benefit: 'Renew tile joints with a consistent finish that is easier to maintain.',
+    process: 'Remove damaged grout, clean the joints, apply epoxy grout and finish the surface.',
+  },
+  {
+    id: 'fiber-paint-application',
+    title: 'Fiber Paint Application',
+    short: 'Fiber Paint Application',
+    image: {
+      src: fiberPaintImage,
+      alt: 'Grey protective coating across a rooftop and its raised wall junctions',
+    },
+    problem: 'Weathered surfaces and vulnerable joints exposed to rain and everyday wear.',
+    solution:
+      'Assess the surface condition and select a fiber paint coating system suited to the substrate and exposure.',
+    benefit: 'Help protect exposed surfaces with a carefully applied coating.',
+    process:
+      'Clean and prepare the surface, repair defects and apply the selected fiber paint system.',
+  },
+  {
+    id: 'polyurethane-coating-application',
+    title: 'Polyurethane Coating Application',
+    short: 'Polyurethane Coating Application',
+    image: {
+      src: polyurethaneImage,
+      alt: 'Coated rooftop passage between tiled roofs with treated parapet walls',
+    },
+    problem: 'Water ingress and deterioration affecting exposed surfaces and junctions.',
+    solution:
+      'Inspect the substrate, moisture conditions and drainage before specifying a suitable polyurethane coating.',
+    benefit: 'Provide a protective surface treatment suited to the site conditions.',
+    process:
+      'Prepare the substrate, treat cracks and joints, and apply and cure the selected coating system.',
+  },
+  {
+    id: 'sand-epoxy-flooring',
+    title: 'Sand Epoxy Flooring',
+    short: 'Sand Epoxy Flooring',
+    image: {
+      src: sandEpoxyImage,
+      alt: 'Plan Kraft sand epoxy flooring graphic showing a finished floor and application stages',
+      scale: 1.4,
+    },
+    problem: 'Worn or uneven floor finishes requiring a suitable protective flooring system.',
+    solution:
+      'Assess the floor condition, intended use and finish requirements to plan a compatible sand epoxy application.',
+    benefit: 'Create a consistent floor finish selected for the way the space is used.',
+    process:
+      'Prepare and repair the floor, apply primer, install the epoxy and sand system, and finish with the specified top coat.',
+  },
+  {
+    id: 'rooftop-heat-proofing',
+    title: 'Rooftop Heat Proofing',
+    short: 'Rooftop Heat Proofing',
+    image: {
+      src: heatProofingImage,
+      alt: 'Rooftop heat-proofing illustration showing insulation boards and protective roof layers',
+    },
+    problem: 'Heat transfer through exposed rooftops affecting the spaces beneath.',
+    solution:
+      'Review the roof condition and existing waterproofing to plan a compatible heat-proofing system.',
+    benefit: 'Help reduce heat transfer through the rooftop and improve indoor comfort.',
+    process:
+      'Prepare the rooftop and install the specified waterproofing, insulation and protective layers.',
+  },
+  {
+    id: 'roof-waterproofing',
+    title: 'Roof Waterproofing',
+    short: 'Roof Waterproofing',
+    image: {
+      src: roofWaterproofingImage,
+      alt: 'Roof protection illustration showing surface preparation, waterproofing and protective layers',
+    },
+    problem: 'Roof leaks and water entry through exposed surfaces, joints and penetrations.',
+    solution:
+      'Inspect the roof and likely leakage paths before selecting a waterproofing treatment compatible with the existing construction.',
+    benefit: 'Help protect the roof structure and the interior from rainwater ingress.',
+    process:
+      'Prepare the roof, repair defects, detail vulnerable junctions and apply the selected waterproofing system.',
+  },
 ] as const;
 export type ServiceId = (typeof services)[number]['id'];
+
+export const homepageServices = [
+  'epoxy-grouting',
+  'fiber-paint-application',
+  'polyurethane-coating-application',
+].map((id) => services.find((service) => service.id === id)!);

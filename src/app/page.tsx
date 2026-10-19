@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { QuoteButton, CallToAction } from '@/components/ui';
-import { services } from '@/data/services';
+import { homepageServices } from '@/data/services';
 import { company } from '@/data/company';
 import Gallery from '@/components/Gallery';
 import BeforeAfter from '@/components/BeforeAfter';
@@ -107,7 +107,7 @@ export default function Home() {
             </div>
           </div>
           <div className="service-preview">
-            {services.slice(0, 3).map((s, i) => (
+            {homepageServices.map((s, i) => (
               <Link className="preview-card" key={s.id} href={`/services#${s.id}`}>
                 <div className="service-graphic service-photo">
                   <Image
@@ -115,6 +115,9 @@ export default function Home() {
                     alt={s.image.alt}
                     fill
                     sizes="(max-width: 700px) 88vw, 30vw"
+                    style={
+                      'scale' in s.image ? { transform: `scale(${s.image.scale})` } : undefined
+                    }
                   />
                 </div>
                 <div className="preview-body">

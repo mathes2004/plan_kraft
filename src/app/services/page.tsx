@@ -5,7 +5,7 @@ import { metadata } from '@/lib/seo';
 export const generateMetadata = () =>
   metadata(
     'Our Services',
-    'Ten inspection-led waterproofing and repair services for properties across Sri Lanka.',
+    'Sixteen inspection-led waterproofing, coating and repair services for properties across Sri Lanka.',
     '/services',
   );
 export default function Services() {
@@ -44,6 +44,9 @@ export default function Services() {
                     alt={s.image.alt}
                     fill
                     sizes="(max-width: 700px) 88vw, 45vw"
+                    style={
+                      'scale' in s.image ? { transform: `scale(${s.image.scale})` } : undefined
+                    }
                   />
                 </div>
                 <div>
