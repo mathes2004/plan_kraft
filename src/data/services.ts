@@ -1,5 +1,5 @@
 import rooftopImage from '@/assets/services/rooftop-waterproofing-new.jpg';
-import bathroomImage from '@/assets/services/bathroom-waterproofing.jpg';
+import bathroomImage from '@/assets/services/bathroom-waterproofing-stages.jpg';
 import balconyImage from '@/assets/services/balcony-waterproofing.jpg';
 import basementImage from '@/assets/services/basement-waterproofing.jpg';
 import tankImage from '@/assets/services/water-tank-waterproofing.jpg';
@@ -37,7 +37,8 @@ export const services = [
     short: 'Bathroom waterproofing',
     image: {
       src: bathroomImage,
-      alt: 'Worker reinforcing a bathroom floor and wall junction with waterproofing material',
+      alt: 'Four stages of bathroom waterproofing showing surface preparation, reinforced corners, coating application and water testing',
+      contentHeight: 1024,
     },
     problem: 'Leaks around wet areas, floor junctions and plumbing penetrations.',
     solution:
