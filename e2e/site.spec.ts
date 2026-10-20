@@ -30,7 +30,6 @@ test('home has the required sections and no process model', async ({ page }) => 
     'Epoxy Grouting↗',
     'Fiber Paint Application↗',
     'Polyurethane Coating Application↗',
-    'Bathroom waterproofing↗',
     'Terraces & balconies↗',
   ]);
 });

@@ -108,7 +108,7 @@ Implementation references: [Git status](https://git-scm.com/docs/git-status), [G
 Routes: `/`, `/services`, `/about`, `/projects`, `/work-process`, `/contact`, `/request-quote`.
 
 - Company facts and contact links: `src/data/company.ts`.
-- Sixteen services and shared image mappings, including six homepage carousel entries starting with Rooftop Waterproofing: `src/data/services.ts`. `ServicesCarousel.tsx` provides native swipe scrolling, previous/next arrows and keyboard navigation; it respects reduced-motion preferences and never rotates automatically.
+- Sixteen services and shared image mappings, including five homepage carousel entries starting with Rooftop Waterproofing: `src/data/services.ts`. `ServicesCarousel.tsx` provides native swipe scrolling, previous/next arrows and keyboard navigation; it respects reduced-motion preferences and never rotates automatically.
 - Completed projects and comparison pair: `src/data/projects.ts`.
 - Work process stages: `src/data/process.ts`.
 - Styling and responsive layouts: `src/app/globals.css`.

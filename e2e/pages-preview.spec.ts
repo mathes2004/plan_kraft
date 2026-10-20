@@ -1,49 +1,34 @@
 import { test, expect } from '@playwright/test';
 
-test('bathroom homepage preview uses the complete Services image', async ({ page }) => {
+test('bathroom is absent from home but retained on Our Services', async ({ page }) => {
   await page.goto('./');
-  await expect(page.getByRole('button', { name: 'Next services' })).toBeEnabled();
-  const card = page.locator('.preview-card[data-service="bathroom"]');
-  await card.focus();
-  const photo = card.locator('img');
+  await expect(page.locator('.service-preview .preview-card')).toHaveCount(5);
+  await expect(page.locator('.preview-card[data-service="bathroom"]')).toHaveCount(0);
+  await page.goto('services/#bathroom');
+  await expect(page.locator('.service-detail')).toHaveCount(16);
+  await expect(page.locator('#bathroom h2')).toHaveText('Bathroom Waterproofing');
+  const photo = page.locator('#bathroom img');
   await photo.scrollIntoViewIfNeeded();
   await expect(photo).toHaveAttribute('src', /bathroom-waterproofing-stages\./);
   await expect
     .poll(() => photo.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth === 1536))
     .toBe(true);
-  const source = await photo.getAttribute('src');
-  const size = await photo.evaluate((el) => {
-    const image = el.getBoundingClientRect();
-    const box = el.closest('.service-graphic')!.getBoundingClientRect();
-    return {
-      ratio: image.width / image.height,
-      widthGap: Math.abs(image.width - box.width),
-      heightGap: Math.abs(image.height - box.height),
-    };
-  });
-  expect(size.ratio).toBeCloseTo(1.5, 2);
-  expect(size.widthGap).toBeLessThan(1);
-  expect(size.heightGap).toBeLessThan(1);
-  await card.click();
-  await expect(page).toHaveURL(/services\/#bathroom$/);
-  await expect(page.locator('#bathroom img')).toHaveAttribute('src', source!);
 });
 
-test('six homepage services scroll with arrows and keyboard and link to their details', async ({
+test('five homepage services scroll with arrows and keyboard and link to their details', async ({
   page,
 }) => {
   await page.goto('./');
   const carousel = page.getByRole('region', { name: 'Featured services' });
   const track = carousel.locator('.service-preview');
   const cards = track.locator('.preview-card');
-  await expect(cards).toHaveCount(6);
+  await expect(cards).toHaveCount(5);
   await expect(cards.first().locator('h3')).toHaveText('Rooftop Waterproofing↗');
   for (const [i, id] of [
     'roof',
     'epoxy-grouting',
     'fiber-paint-application',
     'polyurethane-coating-application',
-    'bathroom',
     'terrace',
   ].entries()) {
     await expect(cards.nth(i)).toHaveAttribute('href', `/plan_kraft/services/#${id}`);

@@ -50,7 +50,7 @@ export default function ServicesCarousel({ children }: { children: ReactNode }) 
       aria-label="Featured services"
     >
       <div className="services-carousel-controls">
-        <p id="services-scroll-help">Scroll to explore all six services</p>
+        <p id="services-scroll-help">Scroll to explore services</p>
         <div className="services-carousel-arrows">
           <button
             type="button"

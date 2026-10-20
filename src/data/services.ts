@@ -258,15 +258,12 @@ export const homepageServices = [
   'epoxy-grouting',
   'fiber-paint-application',
   'polyurethane-coating-application',
-  'bathroom',
   'terrace',
 ].map((id) => {
   const service = services.find((item) => item.id === id)!;
   return {
     ...service,
     image:
-      id === 'bathroom' || id === 'epoxy-grouting'
-        ? service.image
-        : { src: service.image.src, alt: service.image.alt },
+      id === 'epoxy-grouting' ? service.image : { src: service.image.src, alt: service.image.alt },
   };
 });
