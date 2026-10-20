@@ -26,9 +26,12 @@ test('home has the required sections and no process model', async ({ page }) => 
   await expect(page.locator('footer')).toHaveCount(1);
   await expect(page.locator('.process-scene')).toHaveCount(0);
   await expect(page.locator('.service-preview .preview-body h3')).toHaveText([
+    'Rooftop Waterproofing↗',
     'Epoxy Grouting↗',
     'Fiber Paint Application↗',
     'Polyurethane Coating Application↗',
+    'Bathroom waterproofing↗',
+    'Terraces & balconies↗',
   ]);
 });
 test('all sixteen services have quote links', async ({ page }) => {

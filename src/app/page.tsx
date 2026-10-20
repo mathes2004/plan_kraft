@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ServicePhoto } from '@/components/ServicePhoto';
+import ServicesCarousel from '@/components/ServicesCarousel';
 import { QuoteButton, CallToAction } from '@/components/ui';
 import { homepageServices } from '@/data/services';
 import { company } from '@/data/company';
@@ -106,10 +107,13 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className="service-preview">
+          <ServicesCarousel>
             {homepageServices.map((s, i) => (
               <Link className="preview-card" key={s.id} href={`/services#${s.id}`}>
-                <ServicePhoto image={s.image} sizes="(max-width: 700px) 88vw, 30vw" />
+                <ServicePhoto
+                  image={s.image}
+                  sizes="(max-width: 700px) 76vw, (max-width: 1000px) 44vw, 30vw"
+                />
                 <div className="preview-body">
                   <small>0{i + 1} / WATERPROOFING</small>
                   <h3>
@@ -120,7 +124,7 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-          </div>
+          </ServicesCarousel>
         </div>
       </section>
       <section className="section soft">

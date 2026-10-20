@@ -1,5 +1,44 @@
 import { test, expect } from '@playwright/test';
 
+test('six homepage services scroll with arrows and keyboard and link to their details', async ({
+  page,
+}) => {
+  await page.goto('./');
+  const carousel = page.getByRole('region', { name: 'Featured services' });
+  const track = carousel.locator('.service-preview');
+  const cards = track.locator('.preview-card');
+  await expect(cards).toHaveCount(6);
+  await expect(cards.first().locator('h3')).toHaveText('Rooftop Waterproofing↗');
+  for (const [i, id] of [
+    'roof',
+    'epoxy-grouting',
+    'fiber-paint-application',
+    'polyurethane-coating-application',
+    'bathroom',
+    'terrace',
+  ].entries()) {
+    await expect(cards.nth(i)).toHaveAttribute('href', `/plan_kraft/services/#${id}`);
+  }
+  const previous = carousel.getByRole('button', { name: 'Previous services' });
+  const next = carousel.getByRole('button', { name: 'Next services' });
+  await expect(previous).toBeDisabled();
+  await next.click();
+  await expect.poll(() => track.evaluate((el) => el.scrollLeft)).toBeGreaterThan(50);
+  await expect(previous).toBeEnabled();
+  await track.focus();
+  await page.keyboard.press('End');
+  await expect(next).toBeDisabled();
+  await page.keyboard.press('Home');
+  await expect(previous).toBeDisabled();
+  await page.keyboard.press('ArrowRight');
+  await expect(previous).toBeEnabled();
+  await page.keyboard.press('End');
+  await expect(next).toBeDisabled();
+  await cards.last().click();
+  await expect(page).toHaveURL(/services\/#terrace$/);
+  await expect(page.locator('#terrace h2')).toHaveText('Terrace / Balcony Waterproofing');
+});
+
 test('all seven exported routes load beneath the repository path', async ({ page }) => {
   test.setTimeout(60000);
   const broken: string[] = [];

@@ -1,5 +1,6 @@
 import rooftopImage from '@/assets/services/rooftop-waterproofing-new.jpg';
 import bathroomImage from '@/assets/services/bathroom-waterproofing-stages.jpg';
+import bathroomPreviewImage from '@/assets/services/bathroom-waterproofing.jpg';
 import balconyImage from '@/assets/services/balcony-waterproofing.jpg';
 import basementImage from '@/assets/services/basement-waterproofing.jpg';
 import tankImage from '@/assets/services/water-tank-waterproofing.jpg';
@@ -254,7 +255,24 @@ export const services = [
 export type ServiceId = (typeof services)[number]['id'];
 
 export const homepageServices = [
+  'roof',
   'epoxy-grouting',
   'fiber-paint-application',
   'polyurethane-coating-application',
-].map((id) => services.find((service) => service.id === id)!);
+  'bathroom',
+  'terrace',
+].map((id) => {
+  const service = services.find((item) => item.id === id)!;
+  return {
+    ...service,
+    image:
+      id === 'bathroom'
+        ? {
+            src: bathroomPreviewImage,
+            alt: 'Worker reinforcing a bathroom floor and wall junction with waterproofing material',
+          }
+        : id === 'epoxy-grouting'
+          ? service.image
+          : { src: service.image.src, alt: service.image.alt },
+  };
+});
