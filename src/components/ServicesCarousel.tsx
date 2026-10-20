@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 export default function ServicesCarousel({ children }: { children: ReactNode }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [canGoBack, setCanGoBack] = useState(false);
-  const [canGoForward, setCanGoForward] = useState(true);
+  const [canGoForward, setCanGoForward] = useState(false);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -76,6 +76,7 @@ export default function ServicesCarousel({ children }: { children: ReactNode }) 
         className="service-preview"
         id="homepage-services-track"
         ref={trackRef}
+        role="group"
         tabIndex={0}
         aria-label="Service cards"
         aria-describedby="services-scroll-help"
