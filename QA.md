@@ -1,5 +1,15 @@
 # Acceptance record
 
+## Client-owned form verification — 20 October 2026
+
+- Published the client-provided form ID `wi49nocyvbs` in the shared quote configuration. Removed the environment/repository-variable override so a stale deployment setting cannot restore the previous form.
+- The client confirmed Public authentication and published notification steps addressed only to `Plankraftwaterproofing@gmail.com`, with Cc/Bcc empty. Private dashboard settings were not directly inspected by this agent.
+- Nineteen focused unit tests and two desktop/mobile static-form tests passed. The Pages build also passed with a deliberately stale environment override, and exported files contained no retired ID or previous recipient.
+- One labelled test from the deployed website was accepted by the new Forminit endpoint, and the website displayed its accepted message. Live submission identifiers and payload details are excluded from this shared record.
+- **Mailbox receipt and exclusive delivery remain awaiting the client's confirmation.** API acceptance does not establish Gmail delivery. No test was sent to the retired form.
+
+## Earlier implementation checks
+
 Date: 19 October 2026 · Environment: local Windows / Node.js 24.22.0 / Next.js 16.4.2 / installed Microsoft Edge via Playwright.
 Status: tested local implementation preview; production inputs and live acceptance remain pending.
 
