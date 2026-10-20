@@ -1,6 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 
-const endpoint = 'https://forminit.com/f/nilov0qnww9';
+const endpoint = 'https://forminit.com/f/wi49nocyvbs';
 const accepted = {
   success: true,
   submission: { hashId: 'test-submission-01' },

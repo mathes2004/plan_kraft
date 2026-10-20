@@ -28,7 +28,6 @@ jobs:
         env:
           PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
           PAGES_SITE_ORIGIN: ${{ steps.pages.outputs.origin }}
-          NEXT_PUBLIC_FORMINIT_FORM_ID: ${{ vars.FORMINIT_FORM_ID }}
       - uses: actions/upload-pages-artifact@v4
         with:
           path: .pages-preview/out

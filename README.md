@@ -1,4 +1,4 @@
-﻿# PLAN KRAFT — Waterproofing Solutions
+# PLAN KRAFT — Waterproofing Solutions
 
 Seven-page business website built with Next.js App Router, TypeScript and React. Includes sixteen services, twelve completed projects with local photo galleries, a real-photo comparison slider, an interactive homepage house animation, an eight-stage work process and a quote form.
 
@@ -26,7 +26,7 @@ Browser tests use installed Microsoft Edge on Windows. Adjust the Playwright cha
 
 ## Forminit quote emails
 
-The active form uses the documented [Forminit submission endpoint](https://forminit.com/docs/submit-form-api/) in Public mode. Form ID: **nilov0qnww9**. The public ID and expected notification recipient are recorded in `src/data/quote-config.ts`. The optional `NEXT_PUBLIC_FORMINIT_FORM_ID` environment variable overrides the public ID; GitHub Pages can obtain this from the repository variable `FORMINIT_FORM_ID`. No private API key, SDK, application server, Redis database or paid subscription is needed for this integration.
+The active form uses the documented [Forminit submission endpoint](https://forminit.com/docs/submit-form-api/) in Public mode. Form ID: **wi49nocyvbs**. The public ID and expected notification recipient are recorded in `src/data/quote-config.ts`. The tracked configuration is the single source for the form ID. Environment and GitHub repository variables cannot override it, preventing a stale deployment setting from routing submissions to a previous form. No private API key, SDK, application server, Redis database or paid subscription is needed for this integration.
 
 [Forminit's Free plan](https://forminit.com/pricing/) includes one form, email notifications and **100 submissions per month**. Public forms accept at most one request per five seconds per IP address. When the monthly allowance is exhausted, Forminit pauses new submissions; the website keeps entered details and offers phone/WhatsApp contact.
 
@@ -34,11 +34,11 @@ The active form uses the documented [Forminit submission endpoint](https://formi
 
 The website's expected notification recipient is **Plankraftwaterproofing@gmail.com**, shared by the public contact details and the optional server endpoint through `src/data/quote-config.ts`. Forminit routes notifications through its dashboard workflow; the website cannot choose or verify that recipient by adding a field to the submission. Changing the recipient requires updating the workflow's To field and publishing it; changing this project reference alone cannot redirect delivery.
 
-Online Forminit submissions are enabled (`quoteConfig.enabled: true`). On 2026-10-19, the user confirmed that responses reach only **Plankraftwaterproofing@gmail.com** after reviewing and publishing the workflow. For future routing changes, check every notification step and branch: keep one notification addressed exclusively to the expected recipient, empty Cc/Bcc, and publish the workflow. Set Reply-to to the expected recipient when replies should go to the business inbox. Pause website submissions while incorrect recipients remain active, then restore them after exclusive delivery is confirmed. No private dashboard credentials are stored in the website code.
+Online Forminit submissions are enabled (`quoteConfig.enabled: true`). The client provided replacement form **wi49nocyvbs** after reporting that the previous integration still notified the old inbox. The client confirmed that the replacement form uses Public authentication and published notification steps with **Plankraftwaterproofing@gmail.com** as the only To recipient and empty Cc/Bcc. Actual mailbox receipt must still be confirmed with a test notification; the private dashboard was not directly inspected here. For future routing changes, check every notification step and branch: keep one notification addressed exclusively to the expected recipient, empty Cc/Bcc, and publish the workflow. Set Reply-to to the expected recipient when replies should go to the business inbox. Pause website submissions while incorrect recipients remain active, then restore them after exclusive delivery is confirmed. No private dashboard credentials are stored in the website code.
 
 To configure or review it:
 
-1. Open form **nilov0qnww9** in the [Forminit dashboard](https://app.forminit.com/).
+1. Open form **wi49nocyvbs** in the [Forminit dashboard](https://app.forminit.com/).
 2. In Form Settings, choose **Public** authentication.
 3. Under **Workflow**, connect **Submission received** directly to **Send email notification**. Set **To** to **Plankraftwaterproofing@gmail.com**, remove any previous recipients from To/Cc/Bcc, and choose **Publish**.
 4. Keep the default sender `notifications@forminit.com`; custom SMTP is unnecessary. A useful subject is `PLAN KRAFT enquiry {{@submission_id}}`. Use the default answers template, or include all answers in the email body. The form collects a phone number rather than a customer email, so do not use an absent `sender.email` as Reply-to.
@@ -51,7 +51,7 @@ See [email notifications](https://forminit.com/docs/email-notifications/), [work
 
 The required District / project location dropdown lists all 25 Sri Lankan districts alphabetically from `src/data/districts.ts`. Its selected value is validated against the shared list and sent in `fi-text-projectDistrict`. The previous `location` block name was rejected by Forminit with `FI_FIELD_NAME_CONFLICT`; the distinct project-district name has been verified against the live endpoint. It starts and resets with an empty ?Choose a district? placeholder. Custom email templates must include `{{text.projectDistrict}}`; the default answers template includes the visible project-district block automatically.
 
-`src/lib/quote-delivery.ts` maps the existing fields to documented Forminit names: `fi-sender-fullName`, `fi-sender-phone`, `fi-text-projectDistrict`, `fi-text-service`, `fi-text-message`, `fi-text-reference` and `fi-url-source`. The hidden honeypot is `_gotcha`. Browser fetch submits URL-encoded fields to `https://forminit.com/f/nilov0qnww9` with `Accept: application/json`; Forminit explicitly supports this content type. Private keys are never sent from the client.
+`src/lib/quote-delivery.ts` maps the existing fields to documented Forminit names: `fi-sender-fullName`, `fi-sender-phone`, `fi-text-projectDistrict`, `fi-text-service`, `fi-text-message`, `fi-text-reference` and `fi-url-source`. The hidden honeypot is `_gotcha`. Browser fetch submits URL-encoded fields to `https://forminit.com/f/wi49nocyvbs` with `Accept: application/json`; Forminit explicitly supports this content type. Private keys are never sent from the client.
 
 The client validates fields, normalizes Sri Lankan mobile numbers and prevents simultaneous submissions. It shows acceptance only for a successful HTTP response containing `success: true` and a submission ID. Rate limits, disabled/missing forms, exhausted quotas, malformed responses and network failures preserve entered details. The visitor stays on the website after acceptance; remote redirect URLs are not followed. Tracking references do not guarantee deduplication after uncertain responses. No enquiry contents are logged by this application.
 

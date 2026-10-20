@@ -5,7 +5,7 @@ Status: tested local implementation preview; production inputs and live acceptan
 
 ## Forminit migration
 
-The former FormSubmit integration has been removed from the active form. Quote submissions now use Public-mode Forminit form **nilov0qnww9**. The owner confirmed Public authentication and a published Send email notification workflow addressed to **mathesmathes20005@gmail.com**. No private Forminit API key is exposed or required.
+The former FormSubmit integration has been removed from the active form. Quote submissions now use Public-mode Forminit form **wi49nocyvbs**. This client-provided replacement form must use Public authentication and a published Send email notification workflow addressed only to **Plankraftwaterproofing@gmail.com**, with Cc/Bcc empty. The client confirmed those private settings are configured and published; actual mailbox receipt remains a separate verification. The website cannot enforce recipients through submitted fields. No private Forminit API key is exposed or required.
 
 - The complete documentation index was retrieved (50 guide/reference pages), with implementation based on the submission API, block naming, Next.js/React, SDK, honeypot, notifications, workflows, redirections, authorized domains and retention guidance. This static site uses the documented URL-encoded REST interface directly.
 - Both normal Next.js and GitHub Pages production builds passed. All seven primary routes remain available.

@@ -138,12 +138,17 @@ test('client navigation, gallery photos and reloads work without a server', asyn
 });
 
 test('static quote form sends through the free service without a local API', async ({ page }) => {
+  await page.route('https://forminit.com/**', (route) => route.abort());
   const requests: string[] = [];
   page.on('request', (request) => {
     if (request.url().includes('/api/quote')) requests.push(request.url());
   });
   await page.goto('request-quote/?service=roof&project=Rooftop%20waterproofing');
-  await page.route('https://forminit.com/f/nilov0qnww9', (route) => {
+  await expect(page.locator('form')).toHaveAttribute(
+    'action',
+    'https://forminit.com/f/wi49nocyvbs',
+  );
+  await page.route('https://forminit.com/f/wi49nocyvbs', (route) => {
     expect(
       new URLSearchParams(route.request().postData() || '').get('fi-text-projectDistrict'),
     ).toBe('Batticaloa');

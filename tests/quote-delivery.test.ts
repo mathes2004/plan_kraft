@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import {
   forminitEndpoint,
   quoteEmailFields,
@@ -9,8 +9,19 @@ import {
 import { quoteSchema } from '@/lib/validation/quote';
 
 describe('Forminit delivery contract', () => {
+  test('uses the client form even if an old deployment override remains', async () => {
+    vi.stubEnv('NEXT_PUBLIC_FORMINIT_FORM_ID', 'retired-form-id');
+    try {
+      vi.resetModules();
+      const { quoteDeliveryEndpoint } = await import('@/lib/quote-delivery');
+      expect(quoteDeliveryEndpoint).toBe('https://forminit.com/f/wi49nocyvbs');
+    } finally {
+      vi.unstubAllEnvs();
+      vi.resetModules();
+    }
+  });
   test('keeps requests on the official endpoint and rejects missing or invalid IDs', () => {
-    expect(forminitEndpoint('nilov0qnww9')).toBe('https://forminit.com/f/nilov0qnww9');
+    expect(forminitEndpoint('wi49nocyvbs')).toBe('https://forminit.com/f/wi49nocyvbs');
     expect(quoteRecipient).toBe('Plankraftwaterproofing@gmail.com');
     for (const id of [
       '',

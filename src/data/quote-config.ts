@@ -1,8 +1,7 @@
 // Form IDs are public identifiers. Never place a Forminit API key in this file.
 export const quoteConfig = {
-  formId: 'nilov0qnww9',
-  // The owner confirmed exclusive delivery to the recipient below.
+  formId: 'wi49nocyvbs',
   enabled: true,
-  // The matching recipient is configured in Forminit's published email workflow.
+  // Expected sole recipient; actual To/Cc/Bcc are managed in this form's published workflow.
   recipient: 'Plankraftwaterproofing@gmail.com',
 };
