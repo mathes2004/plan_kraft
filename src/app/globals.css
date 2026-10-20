@@ -690,6 +690,9 @@ button:enabled:active {
 .service-preview .service-image-frame {
   width: 100%;
 }
+.service-preview .preview-card[data-service='bathroom'] .service-graphic {
+  aspect-ratio: var(--service-image-ratio);
+}
 .graphic-building {
   width: 160px;
   height: 105px;

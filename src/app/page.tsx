@@ -109,7 +109,12 @@ export default function Home() {
           </div>
           <ServicesCarousel>
             {homepageServices.map((s, i) => (
-              <Link className="preview-card" key={s.id} href={`/services#${s.id}`}>
+              <Link
+                className="preview-card"
+                data-service={s.id}
+                key={s.id}
+                href={`/services#${s.id}`}
+              >
                 <ServicePhoto
                   image={s.image}
                   sizes="(max-width: 700px) 76vw, (max-width: 1000px) 44vw, 30vw"
